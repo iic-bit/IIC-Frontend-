@@ -1,0 +1,69 @@
+.event-container {
+    margin-top: 40px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .event-info {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .event-details {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .action-card {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .register-btn,
+  .rulebook-btn {
+    font-size: 1.1rem;
+    padding: 12px;
+  }
+  
+  .participant-form {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .register-btn,
+    .rulebook-btn {
+      font-size: 1rem;
+    }
+  
+    .event-container {
+      margin-top: 20px;
+    }
+  
+    .event-info {
+      padding: 15px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .register-btn,
+    .rulebook-btn {
+      font-size: 0.9rem;
+    }
+  }
+  

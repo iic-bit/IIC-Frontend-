@@ -1,0 +1,29 @@
+
+.justified-text {
+    text-align: justify;
+    text-justify: inter-word;
+    max-width: 1400px;
+    margin:40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    transition: transform 0.9s ease, box-shadow 0.3s ease;
+    opacity: 0; /* Start invisible for animation */
+    transform: translateY(50px); /* Initial position for animation */
+}
+
+.justified-text.visible {
+    opacity: 1;
+    transform: translateY(0); /* Animate to visible position */
+}
+
+.justified-text:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+}
+
+@media (max-width: 397px) {
+    .justified-text{
+        font-size: 12px;
+    }
+  }

@@ -1,0 +1,44 @@
+body,html {
+    height: 100%;
+}
+.footer {
+    background-color: #003366; /* Dark blue background */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-top: 2px solid #ff3333; /* Red top border to match theme */
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.contact-item .icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.social-media a {
+    color: white;
+    margin: 0 10px;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.social-media a:hover {
+    color: #ff3333; /* Red color on hover */
+}
+
+.social-media .icon {
+    transition: color 0.3s ease;
+}

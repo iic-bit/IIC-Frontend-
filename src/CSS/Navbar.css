@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #003366; /* Navy Blue */
+    color: white;
+  }
+
+  .images img{
+    margin: 0px 5px;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5em;
+    color: #ffffff; /* White */
+  }
+  
+  .navbar-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row; /* Ensures items are in a single line */
+  }
+  
+  .navbar-nav li {
+    margin: 0 15px;
+  }
+  
+  .navbar-nav li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+  }
+  
+  .navbar-nav li a:hover {
+    color: #ff3333; /* Bright Red */
+  }
+  
+  .login-button {
+    padding: 8px 15px;
+    background-color: #ff3333; /* Bright Red */
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #cc0000; /* Darker Red */
+  }
+  
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background-color: #003366; /* Navy Blue */
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .dropdown a:hover {
+    background-color: #ff3333; /* Bright Red */
+  }
+  
+  .dropdown .login-button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 0;
+    text-align: center;
+    background-color: #ff3333; /* Bright Red */
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .menu-icon {
+    display: none;
+    cursor: pointer;
+  }
+  
+  .menu-icon div {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .login-button {
+      display: none;
+    }
+    
+    .menu-icon {
+      display: block;
+    }
+    
+    .navbar-nav{
+      display: none;
+    }
+
+    .dropdown {
+      display: block;
+    }
+  }
+  @media (max-width: 397px) {
+    .login-button {
+      display: none;
+    }
+    
+    .navbar-nav{
+      display: none;
+    }
+
+    .menu-icon {
+      display: block;
+    }
+  
+    .dropdown {
+      display: block;
+    }
+    .img1{
+      width: 40px!important;
+    }
+    .img2{
+      width: 90px!important;
+    }
+    .img3{
+      width: 50px!important;
+    }
+    .img4{
+      width: 70px!important;
+    }
+    .loginPopUp{
+      margin-top: 50%;
+    }
+  }
+  
+  .modal-custom {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  }
+  
+  .modal-body-custom {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .navbar-nav2 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item-custom {
+    margin: 15px 0;
+  }
+  
+  .nav-item-custom a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-item-custom a:hover {
+    color: #0056b3;
+  }
+  
+  .logi-button-custom {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logi-button-custom:hover {
+    background-color: #0056b3;
+  }
+  

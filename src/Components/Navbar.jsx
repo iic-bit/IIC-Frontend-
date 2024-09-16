@@ -26,30 +26,38 @@ function Navbar() {
         className="d-flex justify-content-center images mt-2"
         style={{ flexWrap: "wrap" }}
       >
-        <img
-          className="img1"
-          src={AICTClogo}
-          alt="Logo"
-          style={{ width: "80px" }}
-        />
-        <img
-          className="img2"
-          src={Innovationlogo}
-          alt="Logo"
-          style={{ width: "180px" }}
-        />
-        <img
-          className="img3"
-          src={TpolyLogo}
-          alt="Logo"
-          style={{ width: "100px" }}
-        />
-        <img
-          className="img4"
-          src={IICM}
-          alt="Logo"
-          style={{ width: "140px" }}
-        />
+        <a href="https://www.aicte-india.org/">
+          <img
+            className="img1"
+            src={AICTClogo}
+            alt="Logo"
+            style={{ width: "80px" }}
+          />
+        </a>
+        <a href="https://mic.gov.in/">
+          <img
+            className="img2"
+            src={Innovationlogo}
+            alt="Logo"
+            style={{ width: "180px" }}
+          />
+        </a>
+        <a href="https://www.tpolymumbai.in/">
+          <img
+            className="img3"
+            src={TpolyLogo}
+            alt="Logo"
+            style={{ width: "100px" }}
+          />
+        </a>
+        <a href="https://iic.mic.gov.in/">
+          <img
+            className="img4"
+            src={IICM}
+            alt="Logo"
+            style={{ width: "140px" }}
+          />
+        </a>
       </div>
 
       <nav className="navbar">
@@ -109,7 +117,10 @@ function Navbar() {
         show={dropdownVisible}
         className="d-flex justify-content-center align-items-center modal-custom"
       >
-        <Modal.Header closeButton onClick={()=>setDropdownVisible(false)}></Modal.Header>
+        <Modal.Header
+          closeButton
+          onClick={() => setDropdownVisible(false)}
+        ></Modal.Header>
         <Modal.Body className="px-5 py-2 rounded modal-body-custom">
           <ul
             className="navbar-nav2 list-unstyled text-center"
@@ -148,9 +159,9 @@ function Navbar() {
               <div>
                 {!localStorage.getItem("token") ? (
                   <button
-                    onClick={() =>{
+                    onClick={() => {
                       setshowLoginPopup(true);
-                      setDropdownVisible(false)
+                      setDropdownVisible(false);
                     }}
                     className="btn logi-button-custom"
                   >

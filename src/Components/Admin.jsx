@@ -24,7 +24,7 @@ const Admin = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('https://iic-backend-lcp6.onrender.com//events');
+      const response = await axios.get('https://iic-backend-lcp6.onrender.com/events');
       setEvents(response.data);
     } catch (error) {
       console.error('Error fetching events', error);
@@ -33,7 +33,7 @@ const Admin = () => {
 
   const fetchParticipants = async (eventId) => {
     try {
-        const response = await axios.get(`https://iic-backend-lcp6.onrender.com//events/${eventId}/participants`);
+        const response = await axios.get(`https://iic-backend-lcp6.onrender.com/events/${eventId}/participants`);
         setParticipants(response.data);
     } catch (error) {
         console.error('Error fetching participants', error);
@@ -69,7 +69,7 @@ const groupParticipantsByGroupId = () => {
     });
 
     try {
-      await axios.post('https://iic-backend-lcp6.onrender.com//upload', formDataToSend, {
+      await axios.post('https://iic-backend-lcp6.onrender.com/upload', formDataToSend, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       fetchEvents();
@@ -81,7 +81,7 @@ const groupParticipantsByGroupId = () => {
 
   const handleDeleteEvent = async (id) => {
     try {
-      await axios.delete(`https://iic-backend-lcp6.onrender.com//delete/${id}`);
+      await axios.delete(`https://iic-backend-lcp6.onrender.com/delete/${id}`);
       fetchEvents();
     } catch (error) {
       console.error('Error deleting event', error);
@@ -95,7 +95,7 @@ const groupParticipantsByGroupId = () => {
 
   const handleDownloadCsv = async (eventId) => {
     try {
-      const response = await axios.get(`https://iic-backend-lcp6.onrender.com//events/${eventId}/participants/download`, {
+      const response = await axios.get(`https://iic-backend-lcp6.onrender.com/events/${eventId}/participants/download`, {
         responseType: 'blob',
       });
 

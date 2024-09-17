@@ -31,7 +31,7 @@ const Events = () => {
 
   const fetchEvent = async () => {
     try {
-      const response = await axios.get(`https://iic-backend-lcp6.onrender.com//events/${id}`);
+      const response = await axios.get(`https://iic-backend-lcp6.onrender.com/events/${id}`);
       setEvent(response.data);
       setGroupSize(response.data.groupSize);
       setParticipantData(
@@ -89,7 +89,7 @@ const Events = () => {
 
         // Send participant data to the server
         const response = await axios.post(
-            `https://iic-backend-lcp6.onrender.com//events/${id}/participants`,
+            `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
             { participants: participantData }
         );
 
@@ -113,7 +113,7 @@ const Events = () => {
       <Row className="justify-content-center">
         <Col md={8} className="event-info mb-4">
           <Image
-            src={`https://iic-backend-lcp6.onrender.com//file/${event.image}`}
+            src={`https://iic-backend-lcp6.onrender.com/file/${event.image}`}
             alt={event.name}
             fluid
             className="event-image"

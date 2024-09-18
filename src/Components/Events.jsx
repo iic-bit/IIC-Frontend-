@@ -11,23 +11,36 @@ import {
   ListGroup,
   Card,
   Image,
+  Toast,
 } from "react-bootstrap";
 import "../CSS/Events.css";
 import { FaBook } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Events = () => {
   const [event, setEvent] = useState(null);
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [participantData, setParticipantData] = useState([]);
-  const [groupSize, setGroupSize] = useState(1);
-  const [groupName, setGroupName] = useState(""); // New state for group name
-  const { id } = useParams();
+  const [groupName, setGroupName] = useState("");
 
-  const handleOpenModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+  const [participantData, setParticipantData] = useState([
+    {
+      name: "",
+      email: "",
+      phone: "",
+      year: "",
+      branch: "",
+    },
+  ]);
+  const [groupSize, setGroupSize] = useState(1);
+  const { id } = useParams();
 
   const fetchEvent = async () => {
     try {
@@ -39,9 +52,9 @@ const Events = () => {
           name: "",
           email: "",
           phone: "",
-          year: "first",
-          branch: "Computer Engineering",
-          group: "", // Add group field
+          year: "",
+          branch: "",
+          group: ""
         })
       );
     } catch (error) {
@@ -53,13 +66,16 @@ const Events = () => {
     fetchEvent();
   }, [id]);
 
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedParticipants = [...participantData];
     updatedParticipants[index] = {
       ...updatedParticipants[index],
       [name]: value,
-      group: groupName, // Set the group name for all participants
+      group: groupName
     };
     setParticipantData(updatedParticipants);
   };
@@ -77,35 +93,35 @@ const Events = () => {
 
   const handleRegisterParticipants = async () => {
     try {
-        // Check if all participant details are filled out
-        const allFilled = participantData.every(
-            (p) => p.name && p.email && p.phone && p.year && p.branch && p.group
-        );
-
-        if (!allFilled) {
-            alert("Please fill out all participant details.");
-            return;
-        }
-
-        // Send participant data to the server
-        const response = await axios.post(
-            `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
-            { participants: participantData }
-        );
-
-        if (response.status === 200) {
-            handleClose(); // Close the modal on success
-            alert("Participants registered successfully");
-        } else {
-            alert("Failed to register participants");
-        }
+      // Ensure all participant details are filled out
+      const allFilled = participantData.every(
+        (p) => p.name && p.email && p.phone
+      );
+  
+      if (!allFilled) {
+        alert("Please fill out all participant details.");
+        return;
+      }
+  
+      // Send a single request with the array of participants
+      const response = await axios.post(
+        `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
+        { participants: participantData }
+      );
+  
+      if (response.status === 200) {
+        handleClose(); // Close the modal on success
+        toast.success("Participants registered successfully");
+        // console.log(participantData)
+      } else {
+        toast.error("Failed to register participants");
+      }
     } catch (error) {
-        console.error("Error registering participants", error);
-        alert("Error occurred while registering participants.");
+      // console.error("Error registering participants", error);
+      alert("Error occurred while registering participants.");
     }
-};
-
-
+  };
+  
   if (!event) return <p>Loading...</p>;
 
   return (
@@ -113,7 +129,9 @@ const Events = () => {
       <Row className="justify-content-center">
         <Col md={8} className="event-info mb-4">
           <Image
-            src={`https://iic-backend-lcp6.onrender.com/file/${event.image}`}
+            src={
+              `https://iic-backend-lcp6.onrender.com/file/${event.image}` 
+            }
             alt={event.name}
             fluid
             className="event-image"
@@ -141,33 +159,26 @@ const Events = () => {
             >
               Register Participants
             </Button>
-            {!showModal && (
-              <a
-                href="https://drive.google.com/file/d/119hiywrd_vKWtiPH-_WHtdFt7-qKsT8w/preview"
-                style={{ width: "100%" }}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="secondary"
-                  className="rulebook-btn"
-                  onClick={handleOpenModal}
-                >
+              {!showModal && event &&
+              <a href={`https://drive.google.com/file/d/${event.rule}`} style={{width:"100%"}}>
+                <Button variant="secondary" className="rulebook-btn w-100">  
                   <FaBook className="me-2" />
                   Rule Book
                 </Button>
-              </a>
-            )}
+                </a>
+              }
           </Card>
         </Col>
       </Row>
-      <Modal show={showModal} onHide={handleCloseModal} centered size="lg">
-        <Modal.Header closeButton />
-        <Modal.Body style={{ height: "80vh" }}>
+      <Modal show={showModal} onHide={handleCloseModal} style={{height:""}} centered size="lg">
+      <div style={{height:"50rem",border:"2px solid red"}}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body style={{height:"83%"}}>
           <iframe
             title="Google Drive PDF"
-            src="https://drive.google.com/file/d/119hiywrd_vKWtiPH-_WHtdFt7-qKsT8w/preview"
-            style={{ width: "100%", height: "100%" }}
+            src={`https://drive.google.com/file/d/119hiywrd_vKWtiPH-_WHtdFt7-qKsT8w/preview`}
+            style={{width:"100%",height:"100%"}}
             allowFullScreen
           ></iframe>
         </Modal.Body>
@@ -176,14 +187,15 @@ const Events = () => {
             Close
           </Button>
         </Modal.Footer>
+    </div>
       </Modal>
 
-      <Modal show={show} onHide={handleClose} centered size="lg">
+      <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Register Participants</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="mb-3">
+        <Form className="mb-3">
             <Form.Group controlId="formGroupName">
               <Form.Label>Group Name</Form.Label>
               <Form.Control

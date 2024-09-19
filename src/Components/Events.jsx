@@ -130,7 +130,7 @@ const Events = () => {
         <Col md={8} className="event-info mb-4">
           <Image
             src={
-              event.image 
+              `https://iic-backend-lcp6.onrender.com/file/${event.image}` 
             }
             alt={event.name}
             fluid

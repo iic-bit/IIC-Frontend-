@@ -152,7 +152,7 @@ const Admin = () => {
             <div key={event._id} className="event-item">
               {index > 0 ? <hr /> : null}
               <img
-                src={`https://iic-backend-lcp6.onrender.com/file/${event.image}`}
+                src={event.image}
                 alt={event.name}
                 style={{ width: "100px", height: "100px", borderRadius: "5px" }}
               />

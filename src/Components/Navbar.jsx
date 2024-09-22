@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../CSS/Navbar.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate,useLocation} from "react-router-dom";
 import iiclogo from "../Images/IIC logo.png";
 import AICTClogo from "../Images/AICTC logo.png";
 import Innovationlogo from "../Images/innovation cell logo.png";
@@ -9,12 +9,20 @@ import IICM from "../Images/IICM logo.png";
 import { Modal } from "react-bootstrap";
 import Login from "./login";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 function Navbar() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [showLoginPopup, setshowLoginPopup] = useState(false);
+  const [pathName,setPathName]=useState("/")
+
+  var p=useLocation().pathname
+  useEffect(()=>{
+    setPathName(p)
+  })
 
   const Navigate = useNavigate();
+  console.log(useLocation())
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -69,21 +77,21 @@ function Navbar() {
         </div>
         <ul className="navbar-nav">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" style={{color:`${pathName=='/'?"red":"white"}`}}>Home</Link>
           </li>
           <li>
-            <Link to="/events">Events</Link>
+            <Link to="/events" style={{color:`${pathName=='/events'?"red":"white"}`}}>Events</Link>
           </li>
 
           {localStorage.getItem("token") ? (
             <li>
-              <Link to="/idea-sub">Idea hub</Link>
+              <Link to="/idea-sub" style={{color:`${pathName=='/idea-sub'?"red":"white"}`}}>Idea hub</Link>
             </li>
           ) : null}
           {localStorage.getItem("token") &&
           localStorage.getItem("token").split("//")[1] == "true" ? (
             <li>
-              <Link to="/admin">Admin portal</Link>
+              <Link to="/admin" style={{color:`${pathName=='/admin'?"red":"white"}`}}>Admin portal</Link>
             </li>
           ) : null}
         </ul>

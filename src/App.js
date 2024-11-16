@@ -13,8 +13,18 @@ import IdeaHub from './Components/IdeaHub';
 import Login from './Components/login';
 import Signup from './Components/Regsistor';
 import Hub from './Components/IdeaAdmin'
+import axios from 'axios';
 
 function App() {
+
+  setInterval(async() => {
+    try {
+      const response = await axios.get('https://iic-backend-lcp6.onrender.com/login');
+    } catch (error) {
+      console.error('Error fetching ideas', error);
+    } 
+  }, 1500000);
+
   return (
     <>
     <BrowserRouter>

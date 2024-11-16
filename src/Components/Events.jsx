@@ -232,7 +232,7 @@ const Events = () => {
               <Form.Group controlId={`formParticipantPhone${index}`}>
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
-                  type="tel"
+                  type="number"
                   name="phone"
                   value={participant.phone}
                   onChange={(e) => handleChange(e, index)}

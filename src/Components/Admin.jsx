@@ -16,6 +16,7 @@ const Admin = () => {
     date: "",
     image: null,
     rule: "",
+    fee:"",
     groupSize: 1, // New field for group size
   });
 
@@ -80,7 +81,7 @@ const Admin = () => {
     });
 
     try {
-      await axios.post("https://iic-backend-lcp6.onrender.com/upload", formDataToSend, {
+      await axios.post("`https://iic-backend-lcp6.onrender.com/upload", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       fetchEvents();
@@ -271,6 +272,15 @@ const Admin = () => {
                   type="text"
                   name="rule"
                   value={formData.rule}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formEventRule">
+                <Form.Label>Fee</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="fee"
+                  value={formData.fee}
                   onChange={handleChange}
                 />
               </Form.Group>

@@ -81,7 +81,7 @@ const Admin = () => {
     });
 
     try {
-      await axios.post("`https://iic-backend-lcp6.onrender.com/upload", formDataToSend, {
+      await axios.post("https://iic-backend-lcp6.onrender.com/upload", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       fetchEvents();
@@ -185,53 +185,60 @@ const Admin = () => {
           ))}
           
         </div>
-        {selectedEventId && participants.length > 0 && (
-          <div className="mt-4 text-break">
-            <h3>Participants</h3>
-            <p>Total Participants: {participants.length}</p>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Sr. No.</th>
-                  <th>Group ID</th>
-                  <th>Member Count</th>
-                  <th>Group Name</th>
-                  
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Year</th>
-                  <th>Branch</th>
-                </tr>
-              </thead>
-              <tbody>
-              {Object.entries(groupedParticipants).map(([groupId, { members, count }], index) => (
-                <React.Fragment key={groupId}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{groupId}</td>
-                    <td>{count}</td>
-                    <td colSpan="5"></td>
-                  </tr>
-                  {members.map((participant, memberIndex) => (
-                    <tr key={participant._id}>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>{participant.group}</td>
-                      <td>{participant.name}</td>
-                      <td>{participant.email}</td>
-                      <td>{participant.phone}</td>
-                      <td>{participant.year}</td>
-                      <td>{participant.branch}</td>
+
+        <section name="participantsDetails">
+            {selectedEventId && participants.length >= 0 && (
+              <div className="mt-5 text-break">
+                <hr/>
+                <>
+                <h3 className="d-flex justify-content-center">Participants Details</h3>
+                <hr/>
+                <p>Total Participants: {participants.length}</p>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Sr. No.</th>
+                      <th>Group ID</th>
+                      <th>Member Count</th>
+                      <th>Group Name</th>
+                      
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Year</th>
+                      <th>Branch</th>
                     </tr>
+                  </thead>
+                  {participants.length!==0 ?<tbody>
+                  {Object.entries(groupedParticipants).map(([groupId, { members, count }], index) => (
+                    <React.Fragment key={groupId}>
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{groupId}</td>
+                        <td>{count}</td>
+                        <td colSpan="5"></td>
+                      </tr>
+                      {members.map((participant, memberIndex) => (
+                        <tr key={participant._id}>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>{participant.group}</td>
+                          <td>{participant.name}</td>
+                          <td>{participant.email}</td>
+                          <td>{participant.phone}</td>
+                          <td>{participant.year}</td>
+                          <td>{participant.branch}</td>
+                        </tr>
+                      ))}
+                    </React.Fragment>
                   ))}
-                </React.Fragment>
-              ))}
-              </tbody>
-            </Table>
-          </div>
-        )}
+                  </tbody>: <p className="mt-2 d-flex justify-content-center">No registration found</p>}
+                </Table>
+                </>
+              </div>
+            )}
+        </section>
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>

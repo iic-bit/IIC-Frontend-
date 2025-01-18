@@ -276,6 +276,7 @@ const Events = () => {
                   value={participant.branch}
                   onChange={(e) => handleChange(e, index)}
                 >
+                  <option>Select Option</option>
                   <option>Computer Engineering</option>
                   <option>Civil Engineering</option>
                   <option>Electrical Engineering</option>

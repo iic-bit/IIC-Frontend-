@@ -6,6 +6,7 @@ import AICTClogo from "../Images/AICTC logo.png";
 import Innovationlogo from "../Images/innovation cell logo.png";
 import TpolyLogo from "../Images/Tpoly logo.png";
 import IICM from "../Images/IICM logo.png";
+import TsecLogo from "../Images/TsecLogo.png"
 import { Modal } from "react-bootstrap";
 import Login from "./login";
 import toast from "react-hot-toast";
@@ -22,7 +23,7 @@ function Navbar() {
   })
 
   const Navigate = useNavigate();
-  console.log(useLocation())
+  // console.log(useLocation())
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -64,6 +65,14 @@ function Navbar() {
             src={IICM}
             alt="Logo"
             style={{ width: "140px" }}
+          />
+        </a>
+        <a href="https://tsecmumbai.in">
+          <img
+            className="img4"
+            src={TsecLogo}
+            alt="Logo"
+            style={{ width: "85px" }}
           />
         </a>
       </div>

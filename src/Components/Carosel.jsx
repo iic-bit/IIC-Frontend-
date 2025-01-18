@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../CSS/Home.css"; // Import the CSS file for styling
 import Event from "../Images/Events.png";
 const Carosel = () => {
-  const images = [`${Event}`, `${Event}`, `${Event}`
-    ,"https://via.placeholder.com/1600x900/003366/ffffff?text=Image+1",
-    "https://via.placeholder.com/1600x900/ff3333/ffffff?text=Image+2",
-
-  ];
+  const images = [`${Event}`];
 
   const totalImages = images.length;
   const [currentIndex, setCurrentIndex] = useState(0);

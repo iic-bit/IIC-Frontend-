@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import axios from "axios";
 import '../CSS/Event.css'; // Custom CSS for additional styling
+import toast from "react-hot-toast";
 
 function TextExample() {
     const [event, setEvent] = useState([]);
@@ -13,10 +14,13 @@ function TextExample() {
             });
     }, []);
 
+    // console.log(event)
+
     return (
         <Container className="text-example-container">
             <h1 className='text-center'>Events</h1>
             <Row className="justify-content-center">
+                {event.length !== 0?<>
                 {event.map((event) => (
                     <Col xs={12} sm={6} md={4} lg={3} key={event._id} className="mb-4 d-flex align-items-stretch" style={{cursor:"pointer"}}>
                         <Card className="event-card" onClick={() => window.location.href = `/event/${event._id}`}>
@@ -28,6 +32,7 @@ function TextExample() {
                         </Card>
                     </Col>
                 ))}
+                </>:<p>There are no upcoming events !!</p>}
             </Row>
         </Container>
     );

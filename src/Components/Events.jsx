@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
   Button,
@@ -22,6 +22,8 @@ const Events = () => {
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [groupName, setGroupName] = useState("");
+
+  const navigate=useNavigate();
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -154,7 +156,7 @@ const Events = () => {
           <Card className="p-3 text-center shadow action-card">
             <Button
               variant="primary"
-              onClick={handleShow}
+              onClick={()=>navigate(`/enrollnow/${id}`)}
               className="mb-3 register-btn"
             >
               Register Participants

@@ -205,6 +205,7 @@ const Admin = () => {
                       <th>Name</th>
                       <th>Email</th>
                       <th>Phone</th>
+                      <th>College Name</th>
                       <th>Year</th>
                       <th>Branch</th>
                     </tr>
@@ -227,6 +228,7 @@ const Admin = () => {
                           <td>{participant.name}</td>
                           <td>{participant.email}</td>
                           <td>{participant.phone}</td>
+                          <td>{participant.college}</td>
                           <td>{participant.year}</td>
                           <td>{participant.branch}</td>
                         </tr>

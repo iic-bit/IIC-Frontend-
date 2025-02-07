@@ -35,12 +35,12 @@ function Navbar() {
         className="d-flex justify-content-center images mt-2"
         style={{ flexWrap: "wrap" }}
       >
-        <a href="https://www.aicte-india.org/">
+        <a href="https://www.tpolymumbai.in/">
           <img
-            className="img1"
-            src={AICTClogo}
+            className="img3"
+            src={TpolyLogo}
             alt="Logo"
-            style={{ width: "80px" }}
+            style={{ width: "100px" }}
           />
         </a>
         <a href="https://mic.gov.in/">
@@ -51,12 +51,12 @@ function Navbar() {
             style={{ width: "180px" }}
           />
         </a>
-        <a href="https://www.tpolymumbai.in/">
+        <a href="https://www.aicte-india.org/">
           <img
-            className="img3"
-            src={TpolyLogo}
+            className="img1"
+            src={AICTClogo}
             alt="Logo"
-            style={{ width: "100px" }}
+            style={{ width: "80px" }}
           />
         </a>
         <a href="https://iic.mic.gov.in/">

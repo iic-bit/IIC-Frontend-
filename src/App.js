@@ -14,6 +14,7 @@ import Login from './Components/login';
 import Signup from './Components/Regsistor';
 import Hub from './Components/IdeaAdmin'
 import axios from 'axios';
+import EnrollNow from './Components/EnrollNow';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/login" element={<Login/>} extact></Route>
           <Route path="/signup" element={<Signup/>} extact></Route>
           <Route path="/adminidea" element={<Hub/>} extact></Route>
+          <Route path="/enrollnow/:id" element={<EnrollNow/>} extact></Route>
          </Routes>
         </main>
     </div>

@@ -285,7 +285,7 @@ const Admin = () => {
                 />
               </Form.Group>
               <Form.Group controlId="formEventRule">
-                <Form.Label>Fee</Form.Label>
+                <Form.Label>Fee(Enter 0 if it is free)</Form.Label>
                 <Form.Control
                   type="number"
                   name="fee"
@@ -294,7 +294,7 @@ const Admin = () => {
                 />
               </Form.Group>
               <Form.Group controlId="formEventImage">
-                <Form.Label>Image</Form.Label>
+                <Form.Label>Logo/Poster</Form.Label>
                 <Form.Control type="file" name="image" onChange={handleChange} />
               </Form.Group>
               <Form.Group controlId="formEventGroupSize">

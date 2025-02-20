@@ -45,7 +45,7 @@ const Admin = () => {
       const response = await axios.get(
         `https://iic-backend-lcp6.onrender.com/events/${eventId}/participants`
       );
-      // console.log("Participants data:", response.data); // Debugging
+      console.log("Participants data:", response.data); // Debugging
       setParticipants(response.data);
     } catch (error) {
       console.error("Error fetching participants", error);
@@ -208,6 +208,7 @@ const Admin = () => {
                       <th>College Name</th>
                       <th>Year</th>
                       <th>Branch</th>
+                      <th>Transaction Id</th>
                     </tr>
                   </thead>
                   {participants.length!==0 ?<tbody>
@@ -231,6 +232,7 @@ const Admin = () => {
                           <td>{participant.college}</td>
                           <td>{participant.year}</td>
                           <td>{participant.branch}</td>
+                          <td>{participant.transactionId}</td>
                         </tr>
                       ))}
                     </React.Fragment>

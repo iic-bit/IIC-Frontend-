@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
+import Tesseract from "tesseract.js";
+import qr from "../Images/Hk.jpg"
 
 export default function EnrollNow() {
   const [event, setEvent] = useState(null);
@@ -12,7 +14,59 @@ export default function EnrollNow() {
   const [groupNameError, setGroupNameError] = useState(false); // New state for group name error
   const { id } = useParams();
   const navigate = useNavigate();
+  const [transactionId, setTransactionId] = useState("");
+  const [isOcrProcessing, setIsOcrProcessing] = useState(false);
+  const [ocrText, setOcrText] = useState("");
+  const performOCR = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+  
+    setIsOcrProcessing(true);
+    const reader = new FileReader();
+    reader.onload = function () {
+      console.log("Starting OCR processing...");
+      
+      Tesseract.recognize(reader.result, "eng", { logger: (m) => console.log(m) })
+        .then(({ data: { text } }) => {
+          console.log("Extracted Text:", text); // Debugging
+          setOcrText(text);
+          
+          const extractedId = extractTransactionId(text);
+          if (extractedId) {
+            setTransactionId(extractedId);
+            console.log("Extracted UPI transaction ID:", extractedId);
+            toast.success("Transaction ID detected and auto-filled.");
+          } else {
+            console.log("Failed to match transaction ID pattern.");
+            toast.error("Failed to extract UPI transaction ID.");
+          }
+        })
+        .catch((error) => {
+          console.error("OCR Error:", error);
+          toast.error("Failed to extract text from image.");
+        })
+        .finally(() => setIsOcrProcessing(false));
+    };
+    reader.readAsDataURL(file);
+  };
+  
+  
 
+  const extractTransactionId = (text) => {
+    console.log("Analyzing extracted text for Transaction ID...");
+    
+    // UPI Transaction IDs are usually 12-15 alphanumeric characters, adjust regex if needed
+    const match = text.match(/\b[0-9A-Za-z]{12,15}\b/);
+    
+    return match ? match[0] : "";
+  };
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitting", participantData, transactionId);
+    toast.success("Form submitted successfully!");
+  };
   useEffect(() => {
     const fetchEvent = async () => {
       try {
@@ -27,6 +81,7 @@ export default function EnrollNow() {
             year: "",
             branch: "",
             group: "",
+            transactionId: "",
           })
         );
       } catch (error) {
@@ -43,6 +98,7 @@ export default function EnrollNow() {
       ...updatedParticipants[index],
       [name]: value,
       group: groupName,
+      transactionId: transactionId,
     };
     setParticipantData(updatedParticipants);
   };
@@ -52,10 +108,15 @@ export default function EnrollNow() {
     setGroupName(value);
     setGroupNameError(!value.trim()); // Check if group name is empty
 
-    const updatedParticipants = participantData.map((p) => ({ ...p, group: value }));
+    const updatedParticipants = participantData.map((p) => ({ ...p, group: value,transactionId: transactionId }));
     setParticipantData(updatedParticipants);
   };
-
+  useEffect(() => {
+    setParticipantData(prevData =>
+      prevData.map(p => ({ ...p, transactionId }))
+    );
+  }, [transactionId]);
+// kj  
   const validateForm = () => {
     let newErrors = participantData.map((p) => ({
       name: !p.name,
@@ -77,13 +138,15 @@ export default function EnrollNow() {
       toast.error("Please fill out all required fields.");
       return;
     }
-
+  
+    console.log("Final participant data before sending:", participantData); // Debugging
+  
     try {
       const response = await axios.post(
         `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
         { participants: participantData }
       );
-
+  
       if (response.status === 200) {
         toast.success("Participants registered successfully");
         navigate("/");
@@ -91,9 +154,11 @@ export default function EnrollNow() {
         toast.error("Failed to register participants");
       }
     } catch (error) {
+      console.error("Error in API:", error);
       alert("Error occurred while registering participants.");
     }
   };
+  
 
   if (!event) return <p>Loading...</p>;
 
@@ -244,13 +309,25 @@ export default function EnrollNow() {
               isInvalid={errors[index]?.branch}
             />
             <Form.Control.Feedback type="invalid">Branch is Required !</Form.Control.Feedback>
-          </Form.Group>}
+          </Form.Group> 
+          }
+        
         </Form>
       ))}
-
-      <Button variant="primary" onClick={handleRegisterParticipants}>
-        Register
-      </Button>
+      
+      <Form.Group>
+        <Form.Label>Transaction ID</Form.Label>
+        <Form.Control type="text" value={transactionId} readOnly style={{ backgroundColor: "#e9f5e9" }} />
+        <Form.Text className="text-muted">This field is auto-detected and cannot be edited.</Form.Text>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label> Upload Payment Proof</Form.Label>
+        <Form.Control type="file" onChange={performOCR} />
+      </Form.Group>
+      <div className='qr-code-section'>
+      <img src={qr} alt="payment image"/>
+      </div>
+      <Button onClick={handleRegisterParticipants}>Register</Button>
     </div>
   );
 }

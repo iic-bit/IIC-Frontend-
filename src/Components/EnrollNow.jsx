@@ -12,11 +12,13 @@ export default function EnrollNow() {
   const [participantData, setParticipantData] = useState([]);
   const [errors, setErrors] = useState([]);
   const [groupNameError, setGroupNameError] = useState(false); // New state for group name error
+  const [transactionIdError, setTransactionIdError] = useState(false); // New state for group name error
   const { id } = useParams();
   const navigate = useNavigate();
   const [transactionId, setTransactionId] = useState("");
   const [isOcrProcessing, setIsOcrProcessing] = useState(false);
   const [ocrText, setOcrText] = useState("");
+  const [driveLink, setDriveLink] = useState("");
   const performOCR = (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -24,17 +26,17 @@ export default function EnrollNow() {
     setIsOcrProcessing(true);
     const reader = new FileReader();
     reader.onload = function () {
-      console.log("Starting OCR processing...");
+      // console.log("Starting OCR processing...");
       
-      Tesseract.recognize(reader.result, "eng", { logger: (m) => console.log(m) })
+      Tesseract.recognize(reader.result, "eng", { logger: (m) => null })
         .then(({ data: { text } }) => {
-          console.log("Extracted Text:", text); // Debugging
+          // console.log("Extracted Text:", text); // Debugging
           setOcrText(text);
           
           const extractedId = extractTransactionId(text);
           if (extractedId) {
             setTransactionId(extractedId);
-            console.log("Extracted UPI transaction ID:", extractedId);
+            // console.log("Extracted UPI transaction ID:", extractedId);
             toast.success("Transaction ID detected and auto-filled.");
           } else {
             console.log("Failed to match transaction ID pattern.");
@@ -48,19 +50,63 @@ export default function EnrollNow() {
         .finally(() => setIsOcrProcessing(false));
     };
     reader.readAsDataURL(file);
+    // var reader = new FileReader(); //this for convert to Base64
+    guardarArchivo(event);
   };
   
   
 
   const extractTransactionId = (text) => {
-    console.log("Analyzing extracted text for Transaction ID...");
-    
-    // UPI Transaction IDs are usually 12-15 alphanumeric characters, adjust regex if needed
-    const match = text.match(/\b[0-9A-Za-z]{12,15}\b/);
-    
-    return match ? match[0] : "";
+    // console.log("Analyzing extracted text for Transaction ID...");
+    if (text) {
+      // console.log("OCR Text:", text); // Debug the OCR output
+  
+      // Try numeric match
+      const numericPattern = /\b[0-9]{12,}\b/g;
+      const numericMatch = text.match(numericPattern);
+      if (numericMatch) {
+        // console.log("Numeric Match Found:", numericMatch);
+        setTransactionId(numericMatch[0]); // Use the first numeric match
+        return numericMatch[0];
+      }
+  
+      // Try alphanumeric match
+      const alphanumericPattern = /\b[A-Z0-9]{12,}\b/g;
+      const alphanumericMatch = text.match(alphanumericPattern);
+      if (alphanumericMatch) {
+        // console.log("Alphanumeric Match Found:", alphanumericMatch);
+        setTransactionId(alphanumericMatch[0]); // Use the first alphanumeric match
+        return alphanumericMatch[0];
+      }
+  
+      console.warn("No Match Found");
+      return null;
+    }
   };
   
+  const guardarArchivo = (event) => {
+    const file = event.target.files[0]; //the file
+    // performOCR(file);
+    var reader = new FileReader(); //this for convert to Base64
+    reader.readAsDataURL(file); //start conversion...
+    reader.onload = function (e) {
+      //.. once finished..
+      var rawLog = reader.result.split(",")[1]; //extract only thee file data part
+      var dataSend = {
+        dataReq: { data: rawLog, name: file.name, type: file.type },
+        fname: "uploadFilesToGoogleDrive",
+      }; //preapre info to send to API
+      fetch(
+        "https://script.google.com/macros/s/AKfycbzUoBCscUecSuiH3rp_0rBhbB5hUO6jWynhbqF-FtyAWjyE3SA4T38D33bSNiAnKt1z/exec", //your AppsScript URL
+        { method: "POST", body: JSON.stringify(dataSend) }
+      ) //send to Api
+        .then((res) => res.json())
+        .then((a) => {
+          setDriveLink(a.url); //save the link to state
+        })
+        .catch((e) => console.log(e)); // Or Error in console
+    };
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,6 +124,7 @@ export default function EnrollNow() {
             email: "",
             phone: "",
             college:"",
+            course:"",
             year: "",
             branch: "",
             group: "",
@@ -118,17 +165,29 @@ export default function EnrollNow() {
   }, [transactionId]);
 // kj  
   const validateForm = () => {
-    let newErrors = participantData.map((p) => ({
+    let newErrors = participantData.map((p,index) => (index==0?{
       name: !p.name,
       email: !p.email,
       phone: !p.phone,
+      college: !p.college,
+      course: !p.course,
       year: !p.year,
       branch: !p.branch,
+    }:{
+      name: false,
+      email: false,
+      phone: false,
+      college: false,
+      course: false,
+      year: false,
+      branch: false,
     }));
     setErrors(newErrors);
 
     const isGroupNameValid = !!groupName.trim(); // Ensure group name is not empty
+    const istransactionIdValid = !!transactionId.trim(); // Ensure transactionId is not empty
     setGroupNameError(!isGroupNameValid);
+    setTransactionIdError(!istransactionIdValid)
 
     return isGroupNameValid && newErrors.every((err) => Object.values(err).every((field) => !field));
   };
@@ -192,9 +251,9 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter participant's name"
               required
-              isInvalid={errors[index]?.name}
+              isInvalid={index==0?errors[index]?.name: null}
             />
-            <Form.Control.Feedback type="invalid">Name is required</Form.Control.Feedback>
+            {index == 0 && <Form.Control.Feedback type="invalid">Name is required</Form.Control.Feedback>}
           </Form.Group>
 
           <Form.Group controlId={`formParticipantEmail${index}`}>
@@ -206,7 +265,7 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter participant's email"
               required
-              isInvalid={errors[index]?.email}
+              isInvalid={index == 0?errors[index]?.email:null}
             />
             <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
           </Form.Group>
@@ -220,7 +279,7 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter participant's phone number"
               required
-              isInvalid={errors[index]?.phone}
+              isInvalid={index == 0?errors[index]?.phone: null}
             />
             <Form.Control.Feedback type="invalid">Phone number is required</Form.Control.Feedback>
           </Form.Group>
@@ -234,9 +293,22 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter College Name"
               required
-              isInvalid={errors[index]?.college}
+              isInvalid={index == 0?errors[index]?.college: null}
             />
-            <Form.Control.Feedback type="invalid">Phone number is required</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">College Name is required</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId={`formParticipantPhone${index}`}>
+            <Form.Label>Course</Form.Label>
+            <Form.Control
+              type="text"
+              name="course"
+              value={participant.course}
+              onChange={(e) => handleChange(e, index)}
+              placeholder="Enter College Name"
+              required
+              isInvalid={index == 0?errors[index]?.course: null}
+            />
+            <Form.Control.Feedback type="invalid">Course Name is required</Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group controlId={`formParticipantYear${index}`}>
@@ -277,7 +349,7 @@ export default function EnrollNow() {
                 </div>
               </Form.Group>
 
-          <Form.Group controlId={`formParticipantBranch${index}`}>
+          {/* <Form.Group controlId={`formParticipantBranch${index}`}>
             <Form.Label>Branch</Form.Label>
             <Form.Control
               as="select"
@@ -310,24 +382,43 @@ export default function EnrollNow() {
             />
             <Form.Control.Feedback type="invalid">Branch is Required !</Form.Control.Feedback>
           </Form.Group> 
-          }
-        
+          } */}
+
+          <Form.Group controlId={`formParticipantPhone${index}`}>
+            <Form.Label>Branch Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="branch"
+              value={participant.branch}
+              onChange={(e) => handleChange(e, index)}
+              placeholder="Enter branch Name"
+              required
+              isInvalid={index == 0?errors[index]?.branch: null}
+            />
+            <Form.Control.Feedback type="invalid">Branch Name is required</Form.Control.Feedback>
+          </Form.Group>
+          
         </Form>
       ))}
       
       <Form.Group>
         <Form.Label>Transaction ID</Form.Label>
-        <Form.Control type="text" value={transactionId} readOnly style={{ backgroundColor: "#e9f5e9" }} />
+        <Form.Control type="text" name='transectionId' value={transactionId} readOnly required isInvalid={transactionIdError} style={{ backgroundColor: "#e9f5e9" }} />
         <Form.Text className="text-muted">This field is auto-detected and cannot be edited.</Form.Text>
+        <Form.Control.Feedback type="invalid">Please Upload Proof for the payment</Form.Control.Feedback>
       </Form.Group>
       <Form.Group>
         <Form.Label> Upload Payment Proof</Form.Label>
         <Form.Control type="file" onChange={performOCR} />
       </Form.Group>
-      <div className='qr-code-section'>
-      <img src={qr} alt="payment image"/>
+
+      <div className='container d-flex justify-content-center mt-5 qr-code-section'>
+        <img src={qr} alt="payment image" style={{}}/>
       </div>
+      <div className='d-flex justify-content-end mt-5'>
       <Button onClick={handleRegisterParticipants}>Register</Button>
+
+      </div>
     </div>
   );
 }

@@ -45,7 +45,7 @@ const Admin = () => {
       const response = await axios.get(
         `https://iic-backend-lcp6.onrender.com/events/${eventId}/participants`
       );
-      console.log("Participants data:", response.data); // Debugging
+      // console.log("Participants data:", response.data); // Debugging
       setParticipants(response.data);
     } catch (error) {
       console.error("Error fetching participants", error);
@@ -206,6 +206,7 @@ const Admin = () => {
                       <th>Email</th>
                       <th>Phone</th>
                       <th>College Name</th>
+                      <th>Course Name</th>
                       <th>Year</th>
                       <th>Branch</th>
                       <th>Transaction Id</th>
@@ -230,6 +231,7 @@ const Admin = () => {
                           <td>{participant.email}</td>
                           <td>{participant.phone}</td>
                           <td>{participant.college}</td>
+                          <td>{participant.course}</td>
                           <td>{participant.year}</td>
                           <td>{participant.branch}</td>
                           <td>{participant.transactionId}</td>

@@ -162,10 +162,18 @@ const Events = () => {
               Register Participants
             </Button>
               {!showModal && event &&
-              <a href={`https://drive.google.com/file/d/${event.rule}`} style={{width:"100%"}}>
+              <a href={`${event.rule}`} style={{width:"100%"}}>
                 <Button variant="secondary" className="rulebook-btn w-100">  
                   <FaBook className="me-2" />
                   Rule Book
+                </Button>
+                </a>
+              }
+              {!showModal && event &&
+              <a href={`https://drive.google.com/file/d/1AzZb8ovHSEC8uyvOS9sO0wJc7OJYPiqx/view`} style={{width:"100%"}}>
+                <Button variant="secondary" className="rulebook-btn w-100 mt-3">  
+                  <FaBook className="me-2" />
+                  Topics
                 </Button>
                 </a>
               }
@@ -192,7 +200,7 @@ const Events = () => {
     </div>
       </Modal>
 
-      <Modal show={show} onHide={handleClose} centered>
+      {/* <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Register Participants</Modal.Title>
         </Modal.Header>
@@ -297,7 +305,7 @@ const Events = () => {
             Register
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </Container>
   );
 };

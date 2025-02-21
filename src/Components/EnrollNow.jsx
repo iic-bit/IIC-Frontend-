@@ -20,6 +20,7 @@ export default function EnrollNow() {
   const [isOcrProcessing, setIsOcrProcessing] = useState(false);
   const [ocrText, setOcrText] = useState("");
   const [driveLink, setDriveLink] = useState("");
+  const [conditionCheck,setConditionCheck]=useState(false);
   const performOCR = (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -166,7 +167,7 @@ export default function EnrollNow() {
   }, [transactionId]);
 // kj  
   const validateForm = () => {
-    let newErrors = participantData.map((p,index) => (index==0?{
+    let newErrors = participantData.map((p,index) => ({
       name: !p.name,
       email: !p.email,
       phone: !p.phone,
@@ -174,14 +175,7 @@ export default function EnrollNow() {
       course: !p.course,
       year: !p.year,
       branch: !p.branch,
-    }:{
-      name: false,
-      email: false,
-      phone: false,
-      college: false,
-      course: false,
-      year: false,
-      branch: false,
+      transactionId: !p.transactionId
     }));
     setErrors(newErrors);
 
@@ -252,9 +246,9 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter participant's name"
               required
-              isInvalid={index==0?errors[index]?.name: null}
+              isInvalid={errors[index]?.name}
             />
-            {index == 0 && <Form.Control.Feedback type="invalid">Name is required</Form.Control.Feedback>}
+            <Form.Control.Feedback type="invalid">Name is required</Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group controlId={`formParticipantEmail${index}`}>
@@ -266,7 +260,7 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter participant's email"
               required
-              isInvalid={index == 0?errors[index]?.email:null}
+              isInvalid={errors[index]?.email}
             />
             <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
           </Form.Group>
@@ -280,7 +274,7 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter participant's phone number"
               required
-              isInvalid={index == 0?errors[index]?.phone: null}
+              isInvalid={errors[index]?.phone}
             />
             <Form.Control.Feedback type="invalid">Phone number is required</Form.Control.Feedback>
           </Form.Group>
@@ -294,7 +288,7 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter College Name"
               required
-              isInvalid={index == 0?errors[index]?.college: null}
+              isInvalid={errors[index]?.college}
             />
             <Form.Control.Feedback type="invalid">College Name is required</Form.Control.Feedback>
           </Form.Group>
@@ -307,7 +301,7 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter College Name"
               required
-              isInvalid={index == 0?errors[index]?.course: null}
+              isInvalid={errors[index]?.course}
             />
             <Form.Control.Feedback type="invalid">Course Name is required</Form.Control.Feedback>
           </Form.Group>
@@ -394,7 +388,7 @@ export default function EnrollNow() {
               onChange={(e) => handleChange(e, index)}
               placeholder="Enter branch Name"
               required
-              isInvalid={index == 0?errors[index]?.branch: null}
+              isInvalid={errors[index]?.branch}
             />
             <Form.Control.Feedback type="invalid">Branch Name is required</Form.Control.Feedback>
           </Form.Group>
@@ -416,10 +410,15 @@ export default function EnrollNow() {
       <div className='container d-flex justify-content-center mt-5 qr-code-section image'>
         <img src={qr} alt="payment image" style={{}}/>
       </div>
-      <div className='d-flex justify-content-end mt-5'>
-      <Button onClick={handleRegisterParticipants}>Register</Button>
+      <div className="d-flex mt-3 justify-content-end mt-5">
+        <label className="">
+          I aggree all the <a href=''>Terms & Conditions</a> 
+        </label>
+        <input className="form-check-input ms-2" type="checkbox" value={conditionCheck} onChange={(e)=>setConditionCheck(!conditionCheck)} style={{cursor:"pointer"}}/>
       </div>
-      <input type='checkbox'/>
+      <div className='d-flex justify-content-end'>
+        <Button onClick={handleRegisterParticipants} disabled={!conditionCheck}>Register</Button>
+      </div>
     </div>
   );
 }

@@ -27,7 +27,7 @@ function TextExample() {
                             <Card.Img variant="top" src={event.image} alt="Event Image" className="event-image" />
                             <Card.Body>
                                 <Card.Title className="event-title">{event.name}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted event-subtitle">{event.description}</Card.Subtitle>
+                                <Card.Subtitle className="mb-2 text-muted event-subtitle"><b>{event.description.split("-")[0]}</b></Card.Subtitle>
                             </Card.Body>
                         </Card>
                     </Col>

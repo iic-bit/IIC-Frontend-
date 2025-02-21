@@ -299,7 +299,7 @@ export default function EnrollNow() {
               name="course"
               value={participant.course}
               onChange={(e) => handleChange(e, index)}
-              placeholder="Enter College Name"
+              placeholder="Enter Course Name"
               required
               isInvalid={errors[index]?.course}
             />

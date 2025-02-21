@@ -117,7 +117,7 @@ export default function EnrollNow() {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`http://-backend-lcp6.onrender.com/events/${id}`);
+        const response = await axios.get(`https://iic-backend-lcp6.onrender.com/events/${id}`);
         setEvent(response.data);
         setParticipantData(
           Array(response.data.groupSize).fill({
@@ -199,11 +199,11 @@ export default function EnrollNow() {
       return;
     }
   
-    console.log("Final participant data before sending:", participantData); // Debugging
+    // console.log("Final participant data before sending:", participantData); // Debugging
   
     try {
       const response = await axios.post(
-        `http://-backend-lcp6.onrender.com/events/${id}/participants`,
+        `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
         { participants: participantData }
       );
   
@@ -418,8 +418,8 @@ export default function EnrollNow() {
       </div>
       <div className='d-flex justify-content-end mt-5'>
       <Button onClick={handleRegisterParticipants}>Register</Button>
-
       </div>
+      <input type='checkbox'/>
     </div>
   );
 }

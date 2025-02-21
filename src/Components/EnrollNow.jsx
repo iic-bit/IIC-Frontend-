@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import Tesseract from "tesseract.js";
 import qr from "../Images/Hk.jpg"
+import "../CSS/EnrollNow.css"
 
 export default function EnrollNow() {
   const [event, setEvent] = useState(null);
@@ -116,7 +117,7 @@ export default function EnrollNow() {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`https://iic-backend-lcp6.onrender.com/events/${id}`);
+        const response = await axios.get(`http://-backend-lcp6.onrender.com/events/${id}`);
         setEvent(response.data);
         setParticipantData(
           Array(response.data.groupSize).fill({
@@ -202,7 +203,7 @@ export default function EnrollNow() {
   
     try {
       const response = await axios.post(
-        `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
+        `http://-backend-lcp6.onrender.com/events/${id}/participants`,
         { participants: participantData }
       );
   
@@ -412,7 +413,7 @@ export default function EnrollNow() {
         <Form.Control type="file" onChange={performOCR} />
       </Form.Group>
 
-      <div className='container d-flex justify-content-center mt-5 qr-code-section'>
+      <div className='container d-flex justify-content-center mt-5 qr-code-section image'>
         <img src={qr} alt="payment image" style={{}}/>
       </div>
       <div className='d-flex justify-content-end mt-5'>

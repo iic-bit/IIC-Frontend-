@@ -13,6 +13,14 @@ const Footer = () => {
             <span>Dhanesh Shetty:- <a href='tel:+918591604650'> +91 8591604650</a></span>
           </div>
           <div className="contact-item">
+            <FaPhoneAlt className="icon" />
+            <span>Gargi Surse:- <a href='tel:+917041076454'> +91 7041076454</a></span>
+          </div>
+          <div className="contact-item">
+            <FaPhoneAlt className="icon" />
+            <span>Parth Rane(Faculty Member):- <a href='tel:+919082913961'> +91 9082913961</a></span>
+          </div>
+          <div className="contact-item">
             <FaEnvelope className="icon" />
             <span><a href='mailto:iic@tpoly.in'>iic@tpoly.in</a></span>
           </div>

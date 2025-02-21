@@ -7,6 +7,7 @@ import Innovationlogo from "../Images/innovation cell logo.png";
 import TpolyLogo from "../Images/Tpoly logo.png";
 import IICM from "../Images/IICM logo.png";
 import TsecLogo from "../Images/TsecLogo.png"
+import Moe from "../Images/Moe.jpg"
 import { Modal } from "react-bootstrap";
 import Login from "./login";
 import toast from "react-hot-toast";
@@ -63,6 +64,14 @@ function Navbar() {
           <img
             className="img4"
             src={IICM}
+            alt="Logo"
+            style={{ width: "140px" }}
+          />
+        </a>
+        <a href="https://iic.mic.gov.in/">
+          <img
+            className="img4"
+            src={Moe}
             alt="Logo"
             style={{ width: "140px" }}
           />

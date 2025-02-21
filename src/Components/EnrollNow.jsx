@@ -408,11 +408,11 @@ export default function EnrollNow() {
       </Form.Group>
 
       <div className='container d-flex justify-content-center mt-5 qr-code-section image'>
-        <img src={qr} alt="payment image" style={{}}/>
+        <img src={qr} alt="payment image"/>
       </div>
       <div className="d-flex mt-3 justify-content-end mt-5">
         <label className="">
-          I aggree all the <a href=''>Terms & Conditions</a> 
+          I aggree all the <a target='_blank' href='https://drive.google.com/file/d/1RC5sfVFEeMf6fTRVWOFC_XlupwrdBqcS/view?usp=sharing'>Terms & Conditions</a> 
         </label>
         <input className="form-check-input ms-2" type="checkbox" value={conditionCheck} onChange={(e)=>setConditionCheck(!conditionCheck)} style={{cursor:"pointer"}}/>
       </div>

@@ -35,13 +35,12 @@ const Home = () => {
 
   return (
     <div>
-      {/* <div
+      <div
         class="alert alert-info text-center mb-0 mt-2 animate__animated animate__pulse animate__infinite mx-5"
         role="alert"
       >
-        <span class="">Note:-</span> Registration for Fiesta is started.To
-        Enroll <a href="https://fiesta.tpolymumbai.in">Click Here !</a>
-      </div> */}
+        <span class="">Note:-</span> Registration for Hackspark-1.0 is started.To Enroll <a href="https://iic.tsecmumbai.in/event/67b8258d55544fb56c219cab">Click Here !</a>
+      </div>
       <Carosel />
       <div className="mt-3">
         <div className="d-flex justify-content-center fs-3">

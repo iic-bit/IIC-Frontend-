@@ -144,7 +144,7 @@ const Events = () => {
                 <h3>{event.name}</h3>
               </ListGroup.Item>
               <ListGroup.Item>
-                <h4>Fee: {event.fee}</h4>
+                <h4>Fee:₹ {event.fee} (Per Team)</h4>
               </ListGroup.Item>
               <ListGroup.Item>
                 <p>{event.description}</p>

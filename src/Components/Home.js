@@ -39,7 +39,7 @@ const Home = () => {
         class="alert alert-info text-center mb-0 mt-2 animate__animated animate__pulse animate__infinite mx-5"
         role="alert"
       >
-        <span class="">Note:-</span> Registration for Hackspark-1.0 is started.To Enroll <a href="https://iic.tsecmumbai.in/event/67b8258d55544fb56c219cab">Click Here !</a>
+        <span class="">Note:-</span> Registration for Hackspark-1.0 is closed.
       </div>
       <Carosel />
       <div className="mt-3">

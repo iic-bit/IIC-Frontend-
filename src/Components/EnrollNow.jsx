@@ -187,6 +187,31 @@ export default function EnrollNow() {
     return isGroupNameValid && newErrors.every((err) => Object.values(err).every((field) => !field));
   };
 
+  const handleRegisterParticipants = async () => {
+    if (!validateForm()) {
+      toast.error("Please fill out all required fields.");
+      return;
+    }
+  
+    // console.log("Final participant data before sending:", participantData); // Debugging
+  
+    try {
+      const response = await axios.post(
+        `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
+        { participants: participantData }
+      );
+  
+      if (response.status === 200) {
+        toast.success("Participants registered successfully");
+        navigate("/");
+      } else {
+        toast.error("Failed to register participants");
+      }
+    } catch (error) {
+      console.error("Error in API:", error);
+      alert("Error occurred while registering participants.");
+    }
+  };
   
 
   if (!event) return <p>Loading...</p>;
@@ -382,22 +407,6 @@ export default function EnrollNow() {
           <Form.Label> Upload Payment Proof</Form.Label>
           <Form.Control type="file" onChange={performOCR} />
         </Form.Group>
-<<<<<<< HEAD
-=======
-
-        {/* <div className='container d-flex justify-content-center mt-5 qr-code-section image'>
-          <img src={qr} alt="payment image"/>
-        </div> */}
-        {/* <div className="d-flex mt-3 justify-content-end mt-5">
-          <label className="">
-            I aggree all the <a target='_blank' href='https://drive.google.com/file/d/1RC5sfVFEeMf6fTRVWOFC_XlupwrdBqcS/view?usp=sharing'>Terms & Conditions</a> 
-          </label>
-          <input className="form-check-input ms-2" type="checkbox" value={conditionCheck} onChange={(e)=>setConditionCheck(!conditionCheck)} style={{cursor:"pointer"}}/>
-        </div> */}
-        <div className='d-flex justify-content-end'>
-          <Button onClick={handleRegisterParticipants} disabled={!conditionCheck}>Register</Button>
-        </div>
->>>>>>> 3d604b2165e57e2abc4875abd342eb43f7c91b2d
       </div>:
       <h1 className='d-flex justify-content-center align-items-center' style={{fontWeight:"bolder",fontFamily:"monospace",color:"red"}}>
         Registrations Are Closed !!

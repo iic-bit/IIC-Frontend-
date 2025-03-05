@@ -217,208 +217,214 @@ export default function EnrollNow() {
   if (!event) return <p>Loading...</p>;
 
   return (
-    <div className="container">
-      <Form className="mb-3">
-        <Form.Group controlId="formGroupName">
-          <Form.Label>Group Name</Form.Label>
-          <Form.Control
-            type="text"
-            value={groupName}
-            onChange={handleGroupNameChange}
-            placeholder="Enter group name"
-            required
-            isInvalid={groupNameError} // Show error if empty
-          />
-          <Form.Control.Feedback type="invalid">Group name is required</Form.Control.Feedback>
-        </Form.Group>
-      </Form>
-
-      {participantData.map((participant, index) => (
-        <Form key={index} className="mb-3 participant-form">
-          <h5>Participant {index + 1}</h5>
-
-          <Form.Group controlId={`formParticipantName${index}`}>
-            <Form.Label>Name</Form.Label>
+    <div>{false?
+      <div className="container">
+        <Form className="mb-3">
+          <Form.Group controlId="formGroupName">
+            <Form.Label>Group Name</Form.Label>
             <Form.Control
               type="text"
-              name="name"
-              value={participant.name}
-              onChange={(e) => handleChange(e, index)}
-              placeholder="Enter participant's name"
+              value={groupName}
+              onChange={handleGroupNameChange}
+              placeholder="Enter group name"
               required
-              isInvalid={errors[index]?.name}
+              isInvalid={groupNameError} // Show error if empty
             />
-            <Form.Control.Feedback type="invalid">Name is required</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">Group name is required</Form.Control.Feedback>
           </Form.Group>
-
-          <Form.Group controlId={`formParticipantEmail${index}`}>
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={participant.email}
-              onChange={(e) => handleChange(e, index)}
-              placeholder="Enter participant's email"
-              required
-              isInvalid={errors[index]?.email}
-            />
-            <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group controlId={`formParticipantPhone${index}`}>
-            <Form.Label>Phone Number</Form.Label>
-            <Form.Control
-              type="number"
-              name="phone"
-              value={participant.phone}
-              onChange={(e) => handleChange(e, index)}
-              placeholder="Enter participant's phone number"
-              required
-              isInvalid={errors[index]?.phone}
-            />
-            <Form.Control.Feedback type="invalid">Phone number is required</Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group controlId={`formParticipantPhone${index}`}>
-            <Form.Label>College Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="college"
-              value={participant.college}
-              onChange={(e) => handleChange(e, index)}
-              placeholder="Enter College Name"
-              required
-              isInvalid={errors[index]?.college}
-            />
-            <Form.Control.Feedback type="invalid">College Name is required</Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group controlId={`formParticipantPhone${index}`}>
-            <Form.Label>Course</Form.Label>
-            <Form.Control
-              type="text"
-              name="course"
-              value={participant.course}
-              onChange={(e) => handleChange(e, index)}
-              placeholder="Enter Course Name"
-              required
-              isInvalid={errors[index]?.course}
-            />
-            <Form.Control.Feedback type="invalid">Course Name is required</Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group controlId={`formParticipantYear${index}`}>
-                <Form.Label>Year</Form.Label>
-                <div>
-                  <Form.Check
-                    type="radio"
-                    label="First Year"
-                    name="year"
-                    value="first"
-                    checked={participant.year === "first"}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                  <Form.Check
-                    type="radio"
-                    label="Second Year"
-                    name="year"
-                    value="second"
-                    checked={participant.year === "second"}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                  <Form.Check
-                    type="radio"
-                    label="Third Year"
-                    name="year"
-                    value="third"
-                    checked={participant.year === "third"}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                  <Form.Check
-                    type="radio"
-                    label="Fourth Year"
-                    name="year"
-                    value="fourth"
-                    checked={participant.year === "fourth"}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </div>
-              </Form.Group>
-
-          {/* <Form.Group controlId={`formParticipantBranch${index}`}>
-            <Form.Label>Branch</Form.Label>
-            <Form.Control
-              as="select"
-              name="branch"
-              value={participant.branch}
-              onChange={(e) => handleChange(e, index)}
-              required
-              isInvalid={errors[index]?.branch}
-            >
-              <option value="">Select Option</option>
-              <option value="Computer Engineering">Computer Engineering</option>
-              <option value="Civil Engineering">Civil Engineering</option>
-              <option value="Electrical Engineering">Electrical Engineering</option>
-              <option value="Information Technology">Information Technology</option>
-              <option value="Mechanical Engineering">Mechanical Engineering</option>
-              <option value="other">other</option>
-            </Form.Control>
-            <Form.Control.Feedback type="invalid">Branch selection is required</Form.Control.Feedback>
-          </Form.Group>
-          { participant.branch=="other" && <Form.Group controlId={`formParticipantPhone${index}`}>
-            <Form.Label>Enter Your Branch</Form.Label>
-            <Form.Control
-              type="text"
-              name="branch"
-              value={participant.branch}
-              onChange={(e) => handleChange(e, index)}
-              placeholder="Enter Your Branch"
-              required
-              isInvalid={errors[index]?.branch}
-            />
-            <Form.Control.Feedback type="invalid">Branch is Required !</Form.Control.Feedback>
-          </Form.Group> 
-          } */}
-
-          <Form.Group controlId={`formParticipantPhone${index}`}>
-            <Form.Label>Branch Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="branch"
-              value={participant.branch}
-              onChange={(e) => handleChange(e, index)}
-              placeholder="Enter branch Name"
-              required
-              isInvalid={errors[index]?.branch}
-            />
-            <Form.Control.Feedback type="invalid">Branch Name is required</Form.Control.Feedback>
-          </Form.Group>
-          
         </Form>
-      ))}
-      
-      <Form.Group>
-        <Form.Label>Transaction ID</Form.Label>
-        <Form.Control type="text" name='transectionId' value={transactionId} readOnly required isInvalid={transactionIdError} style={{ backgroundColor: "#e9f5e9" }} />
-        <Form.Text className="text-muted">This field is auto-detected and cannot be edited.</Form.Text>
-        <Form.Control.Feedback type="invalid">Please Upload Proof for the payment</Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group>
-        <Form.Label> Upload Payment Proof</Form.Label>
-        <Form.Control type="file" onChange={performOCR} />
-      </Form.Group>
 
-      <div className='container d-flex justify-content-center mt-5 qr-code-section image'>
-        <img src={qr} alt="payment image"/>
-      </div>
-      <div className="d-flex mt-3 justify-content-end mt-5">
-        <label className="">
-          I aggree all the <a target='_blank' href='https://drive.google.com/file/d/1RC5sfVFEeMf6fTRVWOFC_XlupwrdBqcS/view?usp=sharing'>Terms & Conditions</a> 
-        </label>
-        <input className="form-check-input ms-2" type="checkbox" value={conditionCheck} onChange={(e)=>setConditionCheck(!conditionCheck)} style={{cursor:"pointer"}}/>
-      </div>
-      <div className='d-flex justify-content-end'>
-        <Button onClick={handleRegisterParticipants} disabled={!conditionCheck}>Register</Button>
-      </div>
+        {participantData.map((participant, index) => (
+          <Form key={index} className="mb-3 participant-form">
+            <h5>Participant {index + 1}</h5>
+
+            <Form.Group controlId={`formParticipantName${index}`}>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={participant.name}
+                onChange={(e) => handleChange(e, index)}
+                placeholder="Enter participant's name"
+                required
+                isInvalid={errors[index]?.name}
+              />
+              <Form.Control.Feedback type="invalid">Name is required</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId={`formParticipantEmail${index}`}>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={participant.email}
+                onChange={(e) => handleChange(e, index)}
+                placeholder="Enter participant's email"
+                required
+                isInvalid={errors[index]?.email}
+              />
+              <Form.Control.Feedback type="invalid">Email is required</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId={`formParticipantPhone${index}`}>
+              <Form.Label>Phone Number</Form.Label>
+              <Form.Control
+                type="number"
+                name="phone"
+                value={participant.phone}
+                onChange={(e) => handleChange(e, index)}
+                placeholder="Enter participant's phone number"
+                required
+                isInvalid={errors[index]?.phone}
+              />
+              <Form.Control.Feedback type="invalid">Phone number is required</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId={`formParticipantPhone${index}`}>
+              <Form.Label>College Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="college"
+                value={participant.college}
+                onChange={(e) => handleChange(e, index)}
+                placeholder="Enter College Name"
+                required
+                isInvalid={errors[index]?.college}
+              />
+              <Form.Control.Feedback type="invalid">College Name is required</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId={`formParticipantPhone${index}`}>
+              <Form.Label>Course</Form.Label>
+              <Form.Control
+                type="text"
+                name="course"
+                value={participant.course}
+                onChange={(e) => handleChange(e, index)}
+                placeholder="Enter Course Name"
+                required
+                isInvalid={errors[index]?.course}
+              />
+              <Form.Control.Feedback type="invalid">Course Name is required</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId={`formParticipantYear${index}`}>
+                  <Form.Label>Year</Form.Label>
+                  <div>
+                    <Form.Check
+                      type="radio"
+                      label="First Year"
+                      name="year"
+                      value="first"
+                      checked={participant.year === "first"}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Second Year"
+                      name="year"
+                      value="second"
+                      checked={participant.year === "second"}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Third Year"
+                      name="year"
+                      value="third"
+                      checked={participant.year === "third"}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Fourth Year"
+                      name="year"
+                      value="fourth"
+                      checked={participant.year === "fourth"}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </div>
+                </Form.Group>
+
+            {/* <Form.Group controlId={`formParticipantBranch${index}`}>
+              <Form.Label>Branch</Form.Label>
+              <Form.Control
+                as="select"
+                name="branch"
+                value={participant.branch}
+                onChange={(e) => handleChange(e, index)}
+                required
+                isInvalid={errors[index]?.branch}
+              >
+                <option value="">Select Option</option>
+                <option value="Computer Engineering">Computer Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="other">other</option>
+              </Form.Control>
+              <Form.Control.Feedback type="invalid">Branch selection is required</Form.Control.Feedback>
+            </Form.Group>
+            { participant.branch=="other" && <Form.Group controlId={`formParticipantPhone${index}`}>
+              <Form.Label>Enter Your Branch</Form.Label>
+              <Form.Control
+                type="text"
+                name="branch"
+                value={participant.branch}
+                onChange={(e) => handleChange(e, index)}
+                placeholder="Enter Your Branch"
+                required
+                isInvalid={errors[index]?.branch}
+              />
+              <Form.Control.Feedback type="invalid">Branch is Required !</Form.Control.Feedback>
+            </Form.Group> 
+            } */}
+
+            <Form.Group controlId={`formParticipantPhone${index}`}>
+              <Form.Label>Branch Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="branch"
+                value={participant.branch}
+                onChange={(e) => handleChange(e, index)}
+                placeholder="Enter branch Name"
+                required
+                isInvalid={errors[index]?.branch}
+              />
+              <Form.Control.Feedback type="invalid">Branch Name is required</Form.Control.Feedback>
+            </Form.Group>
+            
+          </Form>
+        ))}
+        
+        <Form.Group>
+          <Form.Label>Transaction ID</Form.Label>
+          <Form.Control type="text" name='transectionId' value={transactionId} readOnly required isInvalid={transactionIdError} style={{ backgroundColor: "#e9f5e9" }} />
+          <Form.Text className="text-muted">This field is auto-detected and cannot be edited.</Form.Text>
+          <Form.Control.Feedback type="invalid">Please Upload Proof for the payment</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label> Upload Payment Proof</Form.Label>
+          <Form.Control type="file" onChange={performOCR} />
+        </Form.Group>
+
+        <div className='container d-flex justify-content-center mt-5 qr-code-section image'>
+          <img src={qr} alt="payment image"/>
+        </div>
+        <div className="d-flex mt-3 justify-content-end mt-5">
+          <label className="">
+            I aggree all the <a target='_blank' href='https://drive.google.com/file/d/1RC5sfVFEeMf6fTRVWOFC_XlupwrdBqcS/view?usp=sharing'>Terms & Conditions</a> 
+          </label>
+          <input className="form-check-input ms-2" type="checkbox" value={conditionCheck} onChange={(e)=>setConditionCheck(!conditionCheck)} style={{cursor:"pointer"}}/>
+        </div>
+        <div className='d-flex justify-content-end'>
+          <Button onClick={handleRegisterParticipants} disabled={!conditionCheck}>Register</Button>
+        </div>
+      </div>:
+      <h1 className='d-flex justify-content-center' style={{fontWeight:"bolder",fontFamily:"monospace",color:"red",alignItems:"center"}}>
+        Registrations Are Closed !!
+      </h1>
+    }
     </div>
   );
 }

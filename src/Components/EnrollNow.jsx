@@ -217,7 +217,7 @@ export default function EnrollNow() {
   if (!event) return <p>Loading...</p>;
 
   return (
-    <div>{false?
+    <div>{localStorage.getItem("token") && localStorage.getItem("token").split("//")[1]=="true"?
       <div className="container">
         <Form className="mb-3">
           <Form.Group controlId="formGroupName">
@@ -421,7 +421,7 @@ export default function EnrollNow() {
           <Button onClick={handleRegisterParticipants} disabled={!conditionCheck}>Register</Button>
         </div>
       </div>:
-      <h1 className='d-flex justify-content-center' style={{fontWeight:"bolder",fontFamily:"monospace",color:"red"}}>
+      <h1 className='d-flex justify-content-center align-items-center' style={{fontWeight:"bolder",fontFamily:"monospace",color:"red"}}>
         Registrations Are Closed !!
       </h1>
     }

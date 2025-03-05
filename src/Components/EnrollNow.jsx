@@ -217,7 +217,7 @@ export default function EnrollNow() {
   if (!event) return <p>Loading...</p>;
 
   return (
-    <div>{localStorage.getItem("token") && localStorage.getItem("token").split("//")[1]=="true"?
+    <div>{false?
       <div className="container">
         <Form className="mb-3">
           <Form.Group controlId="formGroupName">

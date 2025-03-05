@@ -421,7 +421,7 @@ export default function EnrollNow() {
           <Button onClick={handleRegisterParticipants} disabled={!conditionCheck}>Register</Button>
         </div>
       </div>:
-      <h1 className='d-flex justify-content-center' style={{fontWeight:"bolder",fontFamily:"monospace",color:"red",alignItems:"center"}}>
+      <h1 className='d-flex justify-content-center' style={{fontWeight:"bolder",fontFamily:"monospace",color:"red"}}>
         Registrations Are Closed !!
       </h1>
     }

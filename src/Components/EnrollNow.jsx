@@ -187,31 +187,6 @@ export default function EnrollNow() {
     return isGroupNameValid && newErrors.every((err) => Object.values(err).every((field) => !field));
   };
 
-  const handleRegisterParticipants = async () => {
-    if (!validateForm()) {
-      toast.error("Please fill out all required fields.");
-      return;
-    }
-  
-    // console.log("Final participant data before sending:", participantData); // Debugging
-  
-    try {
-      const response = await axios.post(
-        `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
-        { participants: participantData }
-      );
-  
-      if (response.status === 200) {
-        toast.success("Participants registered successfully");
-        navigate("/");
-      } else {
-        toast.error("Failed to register participants");
-      }
-    } catch (error) {
-      console.error("Error in API:", error);
-      alert("Error occurred while registering participants.");
-    }
-  };
   
 
   if (!event) return <p>Loading...</p>;
@@ -417,9 +392,9 @@ export default function EnrollNow() {
           </label>
           <input className="form-check-input ms-2" type="checkbox" value={conditionCheck} onChange={(e)=>setConditionCheck(!conditionCheck)} style={{cursor:"pointer"}}/>
         </div> */}
-        {/* <div className='d-flex justify-content-end'>
+        <div className='d-flex justify-content-end'>
           <Button onClick={handleRegisterParticipants} disabled={!conditionCheck}>Register</Button>
-        </div> */}
+        </div>
       </div>:
       <h1 className='d-flex justify-content-center align-items-center' style={{fontWeight:"bolder",fontFamily:"monospace",color:"red"}}>
         Registrations Are Closed !!

@@ -36,10 +36,10 @@ const Home = () => {
   return (
     <div>
       <div
-        class="alert alert-info text-center mb-0 mt-2 animate__animated animate__pulse animate__infinite mx-5"
+        className="alert alert-danger text-center mb-0 mt-2 animate__animated animate__pulse animate__infinite mx-5"
         role="alert"
       >
-        <span class="">Note:-</span> Registration for Hackspark-1.0 is closed.
+        <span className="">Note:-</span> Registration for Hackspark-1.0 is closed.
       </div>
       <Carosel />
       <div className="mt-3">

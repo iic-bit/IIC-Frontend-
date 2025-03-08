@@ -12,6 +12,7 @@ import { Modal } from "react-bootstrap";
 import Login from "./login";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import {jwtDecode} from "jwt-decode"
 
 function Navbar() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -29,6 +30,9 @@ function Navbar() {
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
+  
+    const decoded = localStorage.getItem("token")?jwtDecode(localStorage.getItem("token")):" "
+
 
   return (
     <div>
@@ -106,8 +110,7 @@ function Navbar() {
               <Link to="/idea-sub" style={{color:`${pathName=='/idea-sub'?"red":"white"}`}}>Idea hub</Link>
             </li>
           ) : null}
-          {localStorage.getItem("token") &&
-          localStorage.getItem("token").split("//")[1] == "true" ? (
+          {decoded && decoded.isAdmin ? (
             <li>
               <Link to="/admin" style={{color:`${pathName=='/admin'?"red":"white"}`}}>Admin portal</Link>
             </li>

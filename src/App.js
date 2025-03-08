@@ -41,7 +41,7 @@ function App() {
       const currentTime = Date.now() / 1000;
         // console.log(currentTime)
       if (decoded.exp < currentTime) {
-        console.log("Token expired! Logging out...");
+        // console.log("Token expired! Logging out...");
         localStorage.removeItem("token");
       }
     }

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Table } from "react-bootstrap";
 import axios from "axios";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode"
+
 
 const Admin = () => {
   const [events, setEvents] = useState([]);
@@ -23,6 +25,9 @@ const Admin = () => {
   useEffect(() => {
     fetchEvents();
     if (localStorage.getItem("token")) {
+      if (jwtDecode(localStorage.getItem("token")).isAdmin) {
+        setAdminProtection(true)
+      }
       setAdminProtection(true)       
       if (localStorage.getItem("token").split("//")[1] == "false") {
         setAdminProtection(false)  

@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {Toaster} from "react-hot-toast"
+import {jwtDecode} from "jwt-decode"
 
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
@@ -25,6 +26,28 @@ function App() {
       console.error('Error fetching ideas', error);
     } 
   }, 1500000);
+
+  // console.log(localStorage.getItem("token").split("//"))
+
+  if (localStorage.getItem("token") && localStorage.getItem("token").split("//")[1]=="true") {
+    localStorage.removeItem("token")
+  }
+
+  const checkTokenExpiration = () => {
+    const token = localStorage.getItem("token");
+  
+    if (token) {
+      const decoded = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+        // console.log(currentTime)
+      if (decoded.exp < currentTime) {
+        console.log("Token expired! Logging out...");
+        localStorage.removeItem("token");
+      }
+    }
+  };
+
+  checkTokenExpiration();
 
   return (
     <>

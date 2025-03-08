@@ -25,7 +25,7 @@ const Login = () => {
             console.log(result)
             if (response.ok) {
                 toast.success('Login successful');
-                localStorage.setItem('token', `${result.token}//${result.isAdmin}`);
+                localStorage.setItem('token', `${result.token}`);
                 // localStorage.setItem('isAdmin', );
                 setTimeout(()=>{
                     window.location.reload() 

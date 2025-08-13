@@ -289,6 +289,7 @@ const Admin = () => {
                   type="text"
                   name="rule"
                   value={formData.rule}
+                  placeholder="Upload RuleBook on Google drive and paste the link here."
                   onChange={handleChange}
                 />
               </Form.Group>

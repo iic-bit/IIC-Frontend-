@@ -35,12 +35,14 @@ const Home = () => {
 
   return (
     <div>
-      <div
+
+      {/* <div
         className="alert alert-danger text-center mb-0 mt-2 animate__animated animate__pulse animate__infinite mx-5"
         role="alert"
       >
         <span className="">Note:-</span> Registration for Hackspark-1.0 is closed.
-      </div>
+      </div> */}
+
       <Carosel />
       <div className="mt-3">
         <div className="d-flex justify-content-center fs-3">

@@ -217,7 +217,7 @@ export default function EnrollNow() {
   if (!event) return <p>Loading...</p>;
 
   return (
-    <div>{false?
+    <div>{true?
       <div className="container">
         <Form className="mb-3">
           <Form.Group controlId="formGroupName">
@@ -427,4 +427,5 @@ export default function EnrollNow() {
     }
     </div>
   );
+
 }

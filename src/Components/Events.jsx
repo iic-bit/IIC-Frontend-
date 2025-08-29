@@ -169,14 +169,6 @@ const Events = () => {
                 </Button>
                 </a>
               }
-              {!showModal && event &&
-              <a href={`https://drive.google.com/file/d/1AzZb8ovHSEC8uyvOS9sO0wJc7OJYPiqx/view`} style={{width:"100%"}}>
-                <Button variant="secondary" className="rulebook-btn w-100 mt-3">  
-                  <FaBook className="me-2" />
-                  Topics
-                </Button>
-                </a>
-              }
           </Card>
         </Col>
       </Row>

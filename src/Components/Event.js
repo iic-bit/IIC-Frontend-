@@ -8,7 +8,7 @@ function TextExample() {
     const [event, setEvent] = useState([]);
 
     useEffect(() => {
-        axios.get('https://iic-backend-lcp6.onrender.com/events')
+        axios.get('https://iic-backend-5opn.onrender.com/events')
             .then((response) => {
                 setEvent(response.data);
             });

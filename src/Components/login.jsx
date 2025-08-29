@@ -13,7 +13,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://iic-backend-lcp6.onrender.com/login', {
+            const response = await fetch('https://iic-backend-5opn.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -31,7 +31,7 @@ const IdeaHub = () => {
     formData.append('pptUpload', data.pptUpload[0]); // Access the first file
 
     try {
-      const response = await fetch('https://iic-backend-lcp6.onrender.com/idea', {
+      const response = await fetch('https://iic-backend-5opn.onrender.com/idea', {
         method: 'POST',
         body: formData,
       });

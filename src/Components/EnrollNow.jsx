@@ -118,7 +118,7 @@ export default function EnrollNow() {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`https://iic-backend-lcp6.onrender.com/events/${id}`);
+        const response = await axios.get(`https://iic-backend-5opn.onrender.com/events/${id}`);
         setEvent(response.data);
         setParticipantData(
           Array(response.data.groupSize).fill({
@@ -197,7 +197,7 @@ export default function EnrollNow() {
   
     try {
       const response = await axios.post(
-        `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
+        `https://iic-backend-5opn.onrender.com/events/${id}/participants`,
         { participants: participantData }
       );
   

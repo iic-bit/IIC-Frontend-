@@ -37,7 +37,7 @@ const Admin = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("https://iic-backend-lcp6.onrender.com/events");
+      const response = await axios.get("https://iic-backend-5opn.onrender.com/events");
       setEvents(response.data);
     } catch (error) {
       console.error("Error fetching events", error);
@@ -48,7 +48,7 @@ const Admin = () => {
     try {
       console.log("Fetching participants for event ID:", eventId); // Debugging
       const response = await axios.get(
-        `https://iic-backend-lcp6.onrender.com/events/${eventId}/participants`
+        `https://iic-backend-5opn.onrender.com/events/${eventId}/participants`
       );
       // console.log("Participants data:", response.data); // Debugging
       setParticipants(response.data);
@@ -86,7 +86,7 @@ const Admin = () => {
     });
 
     try {
-      await axios.post("https://iic-backend-lcp6.onrender.com/upload", formDataToSend, {
+      await axios.post("https://iic-backend-5opn.onrender.com/upload", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       fetchEvents();
@@ -99,7 +99,7 @@ const Admin = () => {
   const handleDeleteEvent = async (id) => {
     if (window.confirm("Once Deleting this event you cannot undo it!!")) {
       try {
-        await axios.delete(`https://iic-backend-lcp6.onrender.com/delete/${id}`);
+        await axios.delete(`https://iic-backend-5opn.onrender.com/delete/${id}`);
         fetchEvents();
       } catch (error) {
         console.error("Error deleting event", error);
@@ -115,7 +115,7 @@ const Admin = () => {
   const handleDownloadCsv = async (eventId) => {
     try {
       const response = await axios.get(
-        `https://iic-backend-lcp6.onrender.com/events/${eventId}/participants/download`,
+        `https://iic-backend-5opn.onrender.com/events/${eventId}/participants/download`,
         {
           responseType: "blob",
         }

@@ -11,7 +11,7 @@ const IdeaPage = () => {
 
   const fetchIdeas = async () => {
     try {
-      const response = await axios.get('https://iic-backend-lcp6.onrender.com/idea');
+      const response = await axios.get('https://iic-backend-5opn.onrender.com/idea');
       setIdeas(response.data);
     } catch (error) {
       console.error('Error fetching ideas', error);
@@ -49,7 +49,7 @@ const IdeaPage = () => {
               <td>{idea.year}</td>
               <td>{idea.idea}</td>
               <td>{idea.proto}</td>
-              <td>{idea.pptUpload ? <a href={`https://iic-backend-lcp6.onrender.com/file/${idea.pptUpload}`} download>Download PPT</a> : 'No PPT'}</td>
+              <td>{idea.pptUpload ? <a href={`https://iic-backend-5opn.onrender.com/file/${idea.pptUpload}`} download>Download PPT</a> : 'No PPT'}</td>
               <td>{new Date(idea.date).toLocaleDateString()}</td>
             </tr>
           ))}

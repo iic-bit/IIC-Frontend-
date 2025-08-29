@@ -46,7 +46,7 @@ const Events = () => {
 
   const fetchEvent = async () => {
     try {
-      const response = await axios.get(`https://iic-backend-lcp6.onrender.com/events/${id}`);
+      const response = await axios.get(`https://iic-backend-5opn.onrender.com/events/${id}`);
       setEvent(response.data);
       setGroupSize(response.data.groupSize);
       setParticipantData(
@@ -107,7 +107,7 @@ const Events = () => {
   
       // Send a single request with the array of participants
       const response = await axios.post(
-        `https://iic-backend-lcp6.onrender.com/events/${id}/participants`,
+        `https://iic-backend-5opn.onrender.com/events/${id}/participants`,
         { participants: participantData }
       );
   

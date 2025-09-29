@@ -136,9 +136,11 @@ const Admin = () => {
   };
 
   const groupedParticipants = groupParticipantsByGroupId();
+  console.log(events)
 
   return (
     <div className="container mt-3">
+      
       {adminProtection ? <>
         <div>
           <Button className="mx-1" onClick={handleShow}>
@@ -157,8 +159,8 @@ const Admin = () => {
             <div key={event._id} className="event-item">
               {index > 0 ? <hr /> : null}
               <img
-                src={event.image}
-                alt={event.name}
+                src={`https://iic-backend-5opn.onrender.com/image/${event.image.split('id=')[1]}`}
+                alt={event.image.split('id=')[1]}
                 style={{ width: "100px", height: "100px", borderRadius: "5px" }}
               />
               <h3 className="text-break">{event.name}</h3>

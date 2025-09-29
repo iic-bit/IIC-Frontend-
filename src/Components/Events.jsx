@@ -131,9 +131,7 @@ const Events = () => {
       <Row className="justify-content-center">
         <Col md={8} className="event-info mb-4">
           <Image
-            src={
-              event.image 
-            }
+            src={`https://iic-backend-5opn.onrender.com/image/${event.image.split('id=')[1]}`}
             alt={event.name}
             fluid
             className="event-image"

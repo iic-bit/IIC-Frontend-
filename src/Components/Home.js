@@ -51,7 +51,7 @@ const Home = () => {
   return (
     <div>
 
-    {notices && <>
+    {notices.length > 0 && <>
       <h3 className="my-3 text-center">Notice</h3>
       {notices.map((notice, i)=>
         (<div

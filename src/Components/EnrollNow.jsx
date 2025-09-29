@@ -21,6 +21,8 @@ export default function EnrollNow() {
   const [ocrText, setOcrText] = useState("");
   const [driveLink, setDriveLink] = useState("");
   const [conditionCheck,setConditionCheck]=useState(false);
+  
+
   const performOCR = (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -55,8 +57,6 @@ export default function EnrollNow() {
     // var reader = new FileReader(); //this for convert to Base64
     guardarArchivo(event);
   };
-  
-  
 
   const extractTransactionId = (text) => {
     // console.log("Analyzing extracted text for Transaction ID...");
@@ -115,30 +115,32 @@ export default function EnrollNow() {
     console.log("Submitting", participantData, transactionId);
     toast.success("Form submitted successfully!");
   };
+
+  const fetchEvent = async () => {
+    try {
+      const response = await axios.get(`https://iic-backend-5opn.onrender.com/events/${id}`);
+      setEvent(response.data);
+      setParticipantData(
+        Array(response.data.groupSize).fill({
+          name: "",
+          email: "",
+          phone: "",
+          college:"",
+          course:"",
+          year: "",
+          branch: "",
+          group: "",
+          transactionId: "",
+        })
+      );
+    } catch (error) {
+      console.error("Error fetching event", error);
+    }
+  };
   useEffect(() => {
-    const fetchEvent = async () => {
-      try {
-        const response = await axios.get(`https://iic-backend-5opn.onrender.com/events/${id}`);
-        setEvent(response.data);
-        setParticipantData(
-          Array(response.data.groupSize).fill({
-            name: "",
-            email: "",
-            phone: "",
-            college:"",
-            course:"",
-            year: "",
-            branch: "",
-            group: "",
-            transactionId: "",
-          })
-        );
-      } catch (error) {
-        console.error("Error fetching event", error);
-      }
-    };
     fetchEvent();
   }, [id]);
+  console.log(event)
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -160,12 +162,13 @@ export default function EnrollNow() {
     const updatedParticipants = participantData.map((p) => ({ ...p, group: value,transactionId: transactionId }));
     setParticipantData(updatedParticipants);
   };
+
   useEffect(() => {
     setParticipantData(prevData =>
       prevData.map(p => ({ ...p, transactionId }))
     );
   }, [transactionId]);
-// kj  
+ 
   const validateForm = () => {
     let newErrors = participantData.map((p,index) => ({
       name: !p.name,
@@ -175,7 +178,7 @@ export default function EnrollNow() {
       course: !p.course,
       year: !p.year,
       branch: !p.branch,
-      transactionId: !p.transactionId
+      transactionId: event.fee !=0 ? !p.transactionId : false
     }));
     setErrors(newErrors);
 
@@ -397,23 +400,27 @@ export default function EnrollNow() {
           </Form>
         ))}
         
-        <Form.Group>
-          <Form.Label>Transaction ID</Form.Label>
-          <Form.Control type="text" name='transectionId' value={transactionId} readOnly required isInvalid={transactionIdError} style={{ backgroundColor: "#e9f5e9" }} />
-          <Form.Text className="text-muted">This field is auto-detected and cannot be edited.</Form.Text>
-          <Form.Control.Feedback type="invalid">Please Upload Proof for the payment</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label> Upload Payment Proof</Form.Label>
-          <Form.Control type="file" onChange={performOCR} />
-        </Form.Group>
+        {/*Payment details only if event fee is applicable */}
+        {event.fee != '0' && <>
+          <Form.Group>
+            <Form.Label>Transaction ID</Form.Label>
+            <Form.Control type="text" name='transectionId' value={transactionId} readOnly required isInvalid={transactionIdError} style={{ backgroundColor: "#e9f5e9" }} />
+            <Form.Text className="text-muted">This field is auto-detected and cannot be edited.</Form.Text>
+            <Form.Control.Feedback type="invalid">Please Upload Proof for the payment</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label> Upload Payment Proof</Form.Label>
+            <Form.Control type="file" onChange={performOCR} />
+          </Form.Group>
 
-        <div className='container d-flex justify-content-center mt-5 qr-code-section image'>
-          <img src={qr} alt="payment image"/>
-        </div>
+          <div className='container d-flex justify-content-center mt-5 qr-code-section image'>
+            <img src={qr} alt="payment image"/>
+          </div>        
+        </>}
+
         <div className="d-flex mt-3 justify-content-end mt-5">
           <label className="">
-            I aggree all the <a target='_blank' href='https://drive.google.com/file/d/1RC5sfVFEeMf6fTRVWOFC_XlupwrdBqcS/view?usp=sharing'>Terms & Conditions</a> 
+            I aggree all the <a target='_blank' href={event.rule}>Terms & Conditions</a> 
           </label>
           <input className="form-check-input ms-2" type="checkbox" value={conditionCheck} onChange={(e)=>setConditionCheck(!conditionCheck)} style={{cursor:"pointer"}}/>
         </div>

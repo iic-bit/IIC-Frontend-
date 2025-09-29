@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../CSS/Home.css"; // Import the CSS file for styling
 import Carosel from "./Carosel";
+import axios from "axios";
 
 const Home = () => {
   const textRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [notices, setNotices] = useState([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,23 +27,42 @@ const Home = () => {
     if (textRef.current) {
       observer.observe(textRef.current);
     }
-
+    
+    fetchNotices();
+    
     return () => {
       if (textRef.current) {
         observer.unobserve(textRef.current);
       }
     };
+
   }, []);
+
+  const fetchNotices = async ()=>{
+    try{
+      const res = await axios.get("https://iic-backend-5opn.onrender.com/notice")
+      setNotices(res.data);
+      console.log(notices);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div>
 
-      {/* <div
-        className="alert alert-danger text-center mb-0 mt-2 animate__animated animate__pulse animate__infinite mx-5"
-        role="alert"
-      >
-        <span className="">Note:-</span> Registration for Hackspark-1.0 is closed.
-      </div> */}
+    {notices && <>
+      <h3 className="my-3 text-center">Notice</h3>
+      {notices.map((notice, i)=>
+        (<div
+          className={`alert ${notice.color == "red" ? "alert-danger": "alert-success"} text-center mb-0 mt-2 animate__animated animate__pulse animate__infinite mx-5`}
+          role="alert"
+        >
+          <div className="mb-0" dangerouslySetInnerHTML={{ __html: notice.note }}></div>
+        </div>
+      ))}
+    </>}
+
 
       <Carosel />
       <div className="mt-3">

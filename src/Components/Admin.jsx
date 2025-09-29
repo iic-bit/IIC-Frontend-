@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Table } from "react-bootstrap";
 import axios from "axios";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode"
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import toast from "react-hot-toast";
 
 
 const Admin = () => {
   const [events, setEvents] = useState([]);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState({
+    addEvent:false,
+    addNotice:false
+  });
   const [selectedEventId, setSelectedEventId] = useState("");
   const [participants, setParticipants] = useState([]);
-  const [adminProtection,setAdminProtection] = useState(false);
+  const [adminProtection, setAdminProtection] = useState(false);
   const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -18,8 +24,12 @@ const Admin = () => {
     date: "",
     image: null,
     rule: "",
-    fee:"",
+    fee: "",
     groupSize: 1, // New field for group size
+  });
+  const [notices, setNotices] = useState({
+    note: "",
+    color: "red",
   });
 
   useEffect(() => {
@@ -28,12 +38,28 @@ const Admin = () => {
       if (jwtDecode(localStorage.getItem("token")).isAdmin) {
         setAdminProtection(true)
       }
-      setAdminProtection(true)       
+      setAdminProtection(true)
       if (localStorage.getItem("token").split("//")[1] == "false") {
-        setAdminProtection(false)  
+        setAdminProtection(false)
       }
     }
   }, []);
+
+  const handleNoticeSubmit =async () => {
+
+    try {
+      // Send data to backend API
+      const response = await axios.post("https://iic-backend-5opn.onrender.com/notice", notices, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      toast.success(response.data.message);
+      setNotices({ description: "", color: "red" });
+      handleClose();
+    } catch (error) {
+      console.error("Error submitting event:", error);
+    }
+  };
 
   const fetchEvents = async () => {
     try {
@@ -59,16 +85,16 @@ const Admin = () => {
 
   const groupParticipantsByGroupId = () => {
     return participants.reduce((acc, participant) => {
-        if (!acc[participant.groupId]) {
-            acc[participant.groupId] = { members: [], count: 0 };
-        }
-        acc[participant.groupId].members.push(participant);
-        acc[participant.groupId].count += 1;
-        return acc;
+      if (!acc[participant.groupId]) {
+        acc[participant.groupId] = { members: [], count: 0 };
+      }
+      acc[participant.groupId].members.push(participant);
+      acc[participant.groupId].count += 1;
+      return acc;
     }, {});
-};
+  };
 
-  const handleShow = () => setShow(true);
+  // const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
   const handleChange = (e) => {
@@ -136,18 +162,17 @@ const Admin = () => {
   };
 
   const groupedParticipants = groupParticipantsByGroupId();
-  console.log(events)
 
   return (
     <div className="container mt-3">
-      
+
       {adminProtection ? <>
         <div>
-          <Button className="mx-1" onClick={handleShow}>
+          <Button className="mx-1" onClick={()=>setShow({...show, addEvent:true})}>
             Add Event
           </Button>
-          <Button className="mx-1" onClick={fetchEvents}>
-            View Events
+          <Button className="mx-1" onClick={()=>setShow({...show, addNotice:true})}>
+            Add Notice
           </Button>
           <Button className="mx-1" onClick={() => Navigate("/adminidea")}>
             Idehub
@@ -189,16 +214,16 @@ const Admin = () => {
               </Button>
             </div>
           ))}
-          
+
         </div>
 
         <section name="participantsDetails">
-            {selectedEventId && participants.length >= 0 && (
-              <div className="mt-5 text-break">
-                <hr/>
-                <>
+          {selectedEventId && participants.length >= 0 && (
+            <div className="mt-5 text-break">
+              <hr />
+              <>
                 <h3 className="d-flex justify-content-center">Participants Details</h3>
-                <hr/>
+                <hr />
                 <p>Total Participants: {participants.length}</p>
                 <Table striped bordered hover>
                   <thead>
@@ -207,7 +232,7 @@ const Admin = () => {
                       <th>Group ID</th>
                       <th>Member Count</th>
                       <th>Group Name</th>
-                      
+
                       <th>Name</th>
                       <th>Email</th>
                       <th>Phone</th>
@@ -218,41 +243,42 @@ const Admin = () => {
                       <th>Transaction Id</th>
                     </tr>
                   </thead>
-                  {participants.length!==0 ?<tbody>
-                  {Object.entries(groupedParticipants).map(([groupId, { members, count }], index) => (
-                    <React.Fragment key={groupId}>
-                      <tr>
-                        <td>{index + 1}</td>
-                        <td>{groupId}</td>
-                        <td>{count}</td>
-                        <td colSpan="5"></td>
-                      </tr>
-                      {members.map((participant, memberIndex) => (
-                        <tr key={participant._id}>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>{participant.group}</td>
-                          <td>{participant.name}</td>
-                          <td>{participant.email}</td>
-                          <td>{participant.phone}</td>
-                          <td>{participant.college}</td>
-                          <td>{participant.course}</td>
-                          <td>{participant.year}</td>
-                          <td>{participant.branch}</td>
-                          <td>{participant.transactionId}</td>
+                  {participants.length !== 0 ? <tbody>
+                    {Object.entries(groupedParticipants).map(([groupId, { members, count }], index) => (
+                      <React.Fragment key={groupId}>
+                        <tr>
+                          <td>{index + 1}</td>
+                          <td>{groupId}</td>
+                          <td>{count}</td>
+                          <td colSpan="5"></td>
                         </tr>
-                      ))}
-                    </React.Fragment>
-                  ))}
-                  </tbody>: <p className="mt-2 d-flex justify-content-center">No registration found</p>}
+                        {members.map((participant, memberIndex) => (
+                          <tr key={participant._id}>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{participant.group}</td>
+                            <td>{participant.name}</td>
+                            <td>{participant.email}</td>
+                            <td>{participant.phone}</td>
+                            <td>{participant.college}</td>
+                            <td>{participant.course}</td>
+                            <td>{participant.year}</td>
+                            <td>{participant.branch}</td>
+                            <td>{participant.transactionId}</td>
+                          </tr>
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </tbody> : <p className="mt-2 d-flex justify-content-center">No registration found</p>}
                 </Table>
-                </>
-              </div>
-            )}
+              </>
+            </div>
+          )}
         </section>
 
-        <Modal show={show} onHide={handleClose}>
+        {/* Modal for Adding New Event */}
+        <Modal show={show.addEvent} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Add Event</Modal.Title>
           </Modal.Header>
@@ -335,7 +361,49 @@ const Admin = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-      </>: <div>You are not loogedin as admin!!</div>}
+
+        {/* Modal for Adding notices */}
+        <Modal show={show.addNotice} onHide={handleClose} size="lg">
+          <Modal.Header closeButton>
+            <Modal.Title>Add Event</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <form>
+              {/* Quill Editor */}
+              <label>Description:</label>
+              <ReactQuill
+                theme="snow"
+                value={notices.note}
+                onChange={(value) => setNotices({ ...notices, note: value })}
+                placeholder="Enter Notice ..."
+                style={{ height: "200px", marginBottom: "20px" }}
+              />
+
+              {/* Color Dropdown */}
+              <label>Choose Color:</label>
+              <select
+                value={notices.color}
+                onChange={(e) => setNotices({ ...notices, color: e.target.value })}
+                style={{ display: "block", marginBottom: "20px", padding: "8px", fontSize: "16px" }}
+              >
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+              </select>
+            </form>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleNoticeSubmit}>
+              Save changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+      </> : <div>You are not loogedin as admin!!</div>}
     </div>
   );
 };

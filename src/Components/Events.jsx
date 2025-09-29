@@ -32,6 +32,7 @@ const Events = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+  
   const [participantData, setParticipantData] = useState([
     {
       name: "",
@@ -67,62 +68,6 @@ const Events = () => {
   useEffect(() => {
     fetchEvent();
   }, [id]);
-
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
-
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    const updatedParticipants = [...participantData];
-    updatedParticipants[index] = {
-      ...updatedParticipants[index],
-      [name]: value,
-      group: groupName
-    };
-    setParticipantData(updatedParticipants);
-  };
-
-  const handleGroupNameChange = (e) => {
-    const { value } = e.target;
-    setGroupName(value);
-    // Update all participants with the new group name
-    const updatedParticipants = participantData.map((p) => ({
-      ...p,
-      group: value,
-    }));
-    setParticipantData(updatedParticipants);
-  };
-
-  const handleRegisterParticipants = async () => {
-    try {
-      // Ensure all participant details are filled out
-      const allFilled = participantData.every(
-        (p) => p.name && p.email && p.phone
-      );
-  
-      if (!allFilled) {
-        alert("Please fill out all participant details.");
-        return;
-      }
-  
-      // Send a single request with the array of participants
-      const response = await axios.post(
-        `https://iic-backend-5opn.onrender.com/events/${id}/participants`,
-        { participants: participantData }
-      );
-  
-      if (response.status === 200) {
-        handleClose(); // Close the modal on success
-        toast.success("Participants registered successfully");
-        // console.log(participantData)
-      } else {
-        toast.error("Failed to register participants");
-      }
-    } catch (error) {
-      // console.error("Error registering participants", error);
-      alert("Error occurred while registering participants.");
-    }
-  };
   
   if (!event) return <p>Loading...</p>;
 

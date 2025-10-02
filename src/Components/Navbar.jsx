@@ -175,8 +175,7 @@ function Navbar() {
                 <Link to="/idea-sub">Idea hub</Link>
               </li>
             ) : null}
-            {localStorage.getItem("token") &&
-            localStorage.getItem("token").split("//")[1] === "true" ? (
+            {decoded && decoded.isAdmin ? (
               <li
                 className="nav-item-custom"
                 onClick={() => setDropdownVisible(false)}

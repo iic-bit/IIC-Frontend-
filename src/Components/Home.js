@@ -42,7 +42,7 @@ const Home = () => {
     try{
       const res = await axios.get("https://iic-backend-5opn.onrender.com/notice")
       setNotices(res.data);
-      console.log(notices);
+      // console.log(notices);
     } catch (error) {
       console.error(error);
     }

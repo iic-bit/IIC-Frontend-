@@ -104,6 +104,9 @@ function Navbar() {
           <li>
             <Link to="/events" style={{color:`${pathName=='/events'?"red":"white"}`}}>Events</Link>
           </li>
+          <li>
+            <Link to="/Pastevents" style={{color:`${pathName=='/Pastevents'?"red":"white"}`}}>PastEvents</Link>
+          </li>
 
           {localStorage.getItem("token") ? (
             <li>

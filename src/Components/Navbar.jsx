@@ -170,6 +170,12 @@ function Navbar() {
             >
               <Link to="/events">Events</Link>
             </li>
+            <li
+              className="nav-item-custom"
+              onClick={() => setDropdownVisible(false)}
+            >
+              <Link to="/Pastevents">PastEvents</Link>
+            </li>
             {localStorage.getItem("token") ? (
               <li
                 className="nav-item-custom"

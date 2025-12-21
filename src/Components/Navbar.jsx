@@ -95,27 +95,33 @@ function Navbar() {
           <img
             src={iiclogo}
             style={{ width: "50px", height: "50px", cursor: "pointer" }}
+            alt="IIC Logo"
           />
         </div>
         <ul className="navbar-nav">
           <li>
-            <Link to="/" style={{color:`${pathName=='/'?"red":"white"}`}}>Home</Link>
+            <Link to="/" style={{color:`${pathName==='/'?"red":"white"}`}}>Home</Link>
+          </li>
+          {/* <li>
+            <Link to="/events" style={{color:`${pathName==='/events'?"red":"white"}`}}>Events</Link>
+          </li> */}
+          <li>
+            <Link to="/Pastevents" style={{color:`${pathName==='/Pastevents'?"red":"white"}`}}>PastEvents</Link>
           </li>
           <li>
-            <Link to="/events" style={{color:`${pathName=='/events'?"red":"white"}`}}>Events</Link>
+            <a href="/hackspark/HackSpark.html" style={{ color: "white" }}> HackSpark-2.0 </a>
           </li>
-          <li>
-            <Link to="/Pastevents" style={{color:`${pathName=='/Pastevents'?"red":"white"}`}}>PastEvents</Link>
-          </li>
+
+
 
           {localStorage.getItem("token") ? (
             <li>
-              <Link to="/idea-sub" style={{color:`${pathName=='/idea-sub'?"red":"white"}`}}>Idea hub</Link>
+              <Link to="/idea-sub" style={{color:`${pathName==='/idea-sub'?"red":"white"}`}}>Idea hub</Link>
             </li>
           ) : null}
           {decoded && decoded.isAdmin ? (
             <li>
-              <Link to="/admin" style={{color:`${pathName=='/admin'?"red":"white"}`}}>Admin portal</Link>
+              <Link to="/admin" style={{color:`${pathName==='/admin'?"red":"white"}`}}>Admin portal</Link>
             </li>
           ) : null}
         </ul>
@@ -164,18 +170,22 @@ function Navbar() {
             >
               <Link to="/">Home</Link>
             </li>
-            <li
+            {/* <li
               className="nav-item-custom"
               onClick={() => setDropdownVisible(false)}
             >
               <Link to="/events">Events</Link>
-            </li>
+            </li> */}
             <li
               className="nav-item-custom"
               onClick={() => setDropdownVisible(false)}
             >
               <Link to="/Pastevents">PastEvents</Link>
             </li>
+            <li className="nav-item-custom" onClick={() => setDropdownVisible(false)}>
+              <a href="/hackspark/HackSpark.html" style={{ color: "black", textDecoration: "none" }}> HackSpark-2.0 </a>
+            </li>
+
             {localStorage.getItem("token") ? (
               <li
                 className="nav-item-custom"

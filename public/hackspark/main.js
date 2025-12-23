@@ -7,6 +7,38 @@ function showAuthToast(message) {
   bsToast.show();
 }
 
+function openEligibilityModalIfNeeded() {
+  const answered = localStorage.getItem('collegeType');
+  if (!answered) {
+    const modal = new bootstrap.Modal(
+      document.getElementById('eligibilityModal')
+    );
+    modal.show();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('eligibilityForm');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const selected = document.querySelector(
+      'input[name="collegeType"]:checked'
+    );
+
+    if (!selected) return;
+
+    localStorage.setItem('collegeType', selected.value);
+
+    const modalEl = document.getElementById('eligibilityModal');
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  });
+});
+
+
 /******************** AUTH UI STATE ********************/
 function refreshAuthUI(user) {
   const regNotice = document.getElementById('regNotice');
@@ -33,13 +65,28 @@ function refreshAuthUI(user) {
 
     primaryCta.textContent = 'Register for event';
 
-    primaryCta.onclick = () => {
-      window.open(
-        // 'https://forms.gle/ACaNufmH2gdHgc9B6',
-        '#',
-        '_blank'
-      );
+    btnRegisterTop.onclick = () => {
+      const collegeType = localStorage.getItem('collegeType');
+
+      if (!collegeType) {
+        openEligibilityModalIfNeeded();
+        return;
+      }
+
+      let formURL = '#';
+
+      if (collegeType === 'TSEC') {
+        formURL = 'https://forms.gle/T9KR3DhuxF9w8fCn7';
+      } else if (collegeType === 'TPOLY') {
+        formURL = 'https://forms.gle/T9KR3DhuxF9w8fCn7';
+      } else {
+        formURL = 'https://forms.gle/A3YKqHiZhEzanJBe7';
+      }
+
+      window.open(formURL, '_blank');
     };
+
+
 
     // Prefill registration modal (if used elsewhere)
     const regEmail = document.getElementById('reg_email');
@@ -79,9 +126,15 @@ if (firebaseAvailable) {
 
   auth.onAuthStateChanged(user => {
     refreshAuthUI(user);
+
+    if (user) {
+      setTimeout(openEligibilityModalIfNeeded, 500);
+    }
+
     if (signupInProgress) return;
     if (user) showAuthToast('Login was successful');
   });
+
 
   // Signup flow (unchanged behavior)
   (function signupFlow() {
@@ -161,6 +214,7 @@ if (firebaseAvailable) {
     btn.addEventListener('click', async () => {
       try {
         await auth.signOut();
+        localStorage.removeItem('collegeType');
         refreshAuthUI(null);
         showAuthToast('Logout was successful');
       } catch (err) {

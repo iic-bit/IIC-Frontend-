@@ -675,3 +675,89 @@ z-index: 1080;
     flex: 0 0 100%; /* 1 card */
   }
 }
+
+/* ===== TOP LOGOS : 4 EQUAL ===== */
+.top-logos-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  gap: 24px;
+  margin-bottom: 18px;
+  z-index: 6;
+}
+
+.logo-link {
+  display: flex;
+  justify-content: center;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .top-logos-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-logos-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+/* ===== HERO HEIGHT & FLOW FIX ===== */
+.hero {
+  align-items: flex-start !important;
+  min-height: unset !important;
+  height: auto !important;
+}
+
+@media (max-width: 768px) {
+  .countdown {
+    margin-bottom: 20px;
+  }
+}
+
+/* Ensure glass cards always expand */
+.hero .glass-card {
+  height: auto !important;
+  min-height: unset !important;
+  overflow: visible !important;
+}
+
+/* ===== MOBILE FIX: LOGOS IN SINGLE ROW ===== */
+@media (max-width: 768px) {
+  .top-logos-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+
+  .logo-circle {
+    width: 46px;
+    height: 46px;
+  }
+
+  .logo-circle img {
+    width: 65%;
+    height: 65%;
+  }
+}
+
+/* ===== MOBILE FIX: AUTH BUTTONS ===== */
+@media (max-width: 768px) {
+  #authControls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  #authControls .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+

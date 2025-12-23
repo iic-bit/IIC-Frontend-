@@ -84,10 +84,16 @@
         </div>
       </div>
 
-      <div id="authControls">
-        <!-- dynamic: Login/Signup when logged out OR Logout + Register when logged in -->
-        <button id="btnLoginTop" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-        <button id="btnSignupTop" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+      <div id="authControls" class="d-flex gap-2 align-items-center">
+
+        <!-- Brochure -->
+        <a href="assets/HackSpark_Brochure.pdf" target="_blank" class="btn btn-outline-light"> 📄 Brochure </a>
+
+        <!-- Login -->
+        <button id="btnLoginTop" class="btn btn-outline-light"> Login </button>
+
+        <!-- Signup -->
+        <button id="btnSignupTop" class="btn btn-outline-light"> Sign Up </button>
 
         <!-- when logged in these show instead (JS toggles) -->
         <a href="#" rel="noopener" target="_blank" class="btn btn-accent me-2 d-none" id="btnRegisterTop"> Register </a>
@@ -130,6 +136,13 @@
           <div class="seg"><small class="sub">Secs</small><b id="cd-secs">00</b></div>
         </div>
       </div>
+
+      <div class="tech-hero-visual">
+        <div class="robot-float">
+          <img src="assets/robot.png" alt="AI Robot" class="robot-tilt" />
+        </div>
+      </div>
+
 
       <div class="col-lg-6 mt-4 mt-lg-0">
         <div class="glass-card p-4 robot-wrap">
@@ -592,51 +605,56 @@
     </footer>
 
   </main>
-   <!-- Mandatory Eligibility Modal -->
-<div class="modal fade" id="eligibilityModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-  <div class="modal-dialog modal-md modal-dialog-centered">
-    <div class="modal-content bg-dark text-white">
-      <div class="modal-header border-0">
-        <h5 class="modal-title">Mandatory Verification</h5>
-      </div>
-
-      <form id="eligibilityForm">
-        <div class="modal-body">
-          <p class="mb-3 fw-semibold">
-            Please select your college to continue registration:
-          </p>
-
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="radio" name="collegeType" value="TSEC" id="collegeTSEC" required>
-            <label class="form-check-label" for="collegeTSEC">
-              Thakur Shyamnarayan Engineering College (TSEC)
-            </label>
-          </div>
-
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="radio" name="collegeType" value="TPOLY" id="collegeTPOLY">
-            <label class="form-check-label" for="collegeTPOLY">
-              Thakur Polytechnic (TPOLY)
-            </label>
-          </div>
-
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="radio" name="collegeType" value="OTHER" id="collegeOTHER">
-            <label class="form-check-label" for="collegeOTHER">
-              Other College
-            </label>
-          </div>
-        </div>
-
-        <div class="modal-footer border-0">
-          <button type="submit" class="btn btn-accent w-100">
-            Continue
-          </button>
-        </div>
-      </form>
-    </div>
+  <div class="tech-particles">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
   </div>
-</div>
+
+    <!-- Mandatory Eligibility Modal -->
+    <div class="modal fade" id="eligibilityModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Mandatory Verification</h5>
+          </div>
+
+          <form id="eligibilityForm">
+            <div class="modal-body">
+              <p class="mb-3 fw-semibold">
+                Please select your college to continue registration:
+              </p>
+
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="collegeType" value="TSEC" id="collegeTSEC" required>
+                <label class="form-check-label" for="collegeTSEC">
+                  Thakur Shyamnarayan Engineering College (TSEC)
+                </label>
+              </div>
+
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="collegeType" value="TPOLY" id="collegeTPOLY">
+                <label class="form-check-label" for="collegeTPOLY">
+                  Thakur Polytechnic (TPOLY)
+                </label>
+              </div>
+
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="collegeType" value="OTHER" id="collegeOTHER">
+                <label class="form-check-label" for="collegeOTHER">
+                  Other College
+                </label>
+              </div>
+            </div>
+
+            <div class="modal-footer border-0">
+              <button type="submit" class="btn btn-accent w-100">
+                Continue
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
   <!-- Registration Modal (only usable when logged in) -->
   <div class="modal fade" id="regModal" tabindex="-1" aria-hidden="true">

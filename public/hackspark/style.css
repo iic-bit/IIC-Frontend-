@@ -761,3 +761,60 @@ z-index: 1080;
   }
 }
 
+/* ===== TECH GRID EFFECT ===== */
+.container-main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(77,163,255,0.06) 1px, transparent 1px),
+    linear-gradient(rgba(77,163,255,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridMove 30s linear infinite;
+}
+
+@keyframes gridMove {
+  from { background-position: 0 0; }
+  to { background-position: 120px 120px; }
+}
+
+/* ===== FIXED 3D ROBOT ===== */
+.tech-hero-visual {
+  position: absolute;
+  right: 6%;
+  top: 18%;
+  width: 280px;
+  perspective: 1200px;
+  z-index: 4;
+  pointer-events: auto;
+}
+
+/* floating layer */
+.robot-float {
+  animation: robotFloat 4s ease-in-out infinite;
+}
+
+/* tilt layer */
+.robot-tilt {
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out;
+  filter: drop-shadow(0 30px 40px rgba(0,0,0,0.18));
+  will-change: transform;
+}
+
+@keyframes robotFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+  100% { transform: translateY(0); }
+}
+
+/* hide on mobile */
+@media (max-width: 992px) {
+  .tech-hero-visual {
+    display: none;
+  }
+}
+

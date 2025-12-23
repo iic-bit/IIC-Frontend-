@@ -564,3 +564,51 @@ if (highlightModal) {
 
   window.addEventListener('resize', updateSlider);
 })();
+
+/* ===== ROBOT HOVER TILT (ISOLATED) ===== */
+(function robotHover() {
+  const robot = document.querySelector('.robot-tilt');
+  if (!robot) return;
+
+  document.addEventListener('mousemove', (e) => {
+    const rect = robot.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    const dx = (e.clientX - cx) / 18;
+    const dy = (e.clientY - cy) / 18;
+
+    robot.style.transform = `
+      rotateX(${-dy}deg)
+      rotateY(${dx}deg)
+    `;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    robot.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  });
+})();
+
+/* ===== TOP LOGIN / SIGNUP BUTTON FIX ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const btnLoginTop = document.getElementById('btnLoginTop');
+  const btnSignupTop = document.getElementById('btnSignupTop');
+
+  if (btnLoginTop) {
+    btnLoginTop.addEventListener('click', () => {
+      const modal = new bootstrap.Modal(
+        document.getElementById('loginModal')
+      );
+      modal.show();
+    });
+  }
+
+  if (btnSignupTop) {
+    btnSignupTop.addEventListener('click', () => {
+      const modal = new bootstrap.Modal(
+        document.getElementById('signupModal')
+      );
+      modal.show();
+    });
+  }
+});

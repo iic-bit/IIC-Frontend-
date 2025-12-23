@@ -572,3 +572,106 @@ z-index: 1080;
 .top-logos a .logo-circle {
   transition: transform .18s ease, box-shadow .18s ease;
 }
+
+#aboutCarousel .carousel-control-prev,
+#aboutCarousel .carousel-control-next {
+  width: 5%;
+}
+
+.about-card {
+  transition: transform .3s ease;
+}
+.about-card:hover {
+  transform: translateY(-6px);
+}
+
+/* navigation buttons */
+.about-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.about-nav.left { left: -10px; }
+.about-nav.right { right: -10px; }
+
+.about-nav:hover {
+  background: rgba(0,0,0,0.85);
+}
+
+/* responsive */
+@media (max-width: 992px) {
+  .about-slide { flex: 0 0 50%; }
+}
+
+@media (max-width: 576px) {
+  .about-slide { flex: 0 0 100%; }
+}
+
+/* ================= ABOUT US SLIDER ================= */
+
+.about-slider-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.about-slider {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.45s ease;
+  will-change: transform;
+}
+
+.about-slide {
+  flex: 0 0 calc(33.333% - 16px); /* EXACTLY 3 cards */
+}
+
+/* arrows */
+.about-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.about-nav.left {
+  left: -14px;
+}
+
+.about-nav.right {
+  right: -14px;
+}
+
+.about-nav:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* responsive */
+@media (max-width: 992px) {
+  .about-slide {
+    flex: 0 0 calc(50% - 12px); /* 2 cards */
+  }
+}
+
+@media (max-width: 576px) {
+  .about-slide {
+    flex: 0 0 100%; /* 1 card */
+  }
+}

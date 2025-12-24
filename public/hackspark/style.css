@@ -818,3 +818,35 @@ z-index: 1080;
   }
 }
 
+/* ===== TEXT JUSTIFICATION (CHROME SAFE) ===== */
+
+/* HackSpark-2.0 content */
+.hero p,
+.hero .sub {
+  text-align: justify;
+}
+
+/* Why Join content */
+.robot-wrap p,
+.robot-wrap li {
+  text-align: justify;
+  line-height: 1.65;
+}
+
+/* Mobile readability */
+@media (max-width: 768px) {
+  .hero p,
+  .hero .sub,
+  .robot-wrap p,
+  .robot-wrap li {
+    text-align: left;
+  }
+}
+
+.hero p,
+.robot-wrap li {
+  word-spacing: 0.05em;
+}
+.robot-wrap p {
+  word-spacing: 0.03em;
+}

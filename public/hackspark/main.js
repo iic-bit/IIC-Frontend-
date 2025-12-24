@@ -437,7 +437,7 @@ if (firebaseAvailable) {
     "> Initializing HackSpark 2.0...",
     "> Powered by TSEC IIC",
     "> Teams assembling...",
-    "> rendering scene: 'ArtOfFiction'",
+    // "> rendering scene: 'ArtOfFiction'",
     "> mentors connected",
     "> 24-hour innovation begins",
     "> Code. Create. Compete."

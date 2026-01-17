@@ -27,3 +27,92 @@
         font-size: 12px;
     }
   }
+
+@media (max-width: 768px) {
+    .justified-text {
+        font-size: 14px;
+        padding: 15px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .justified-text {
+        font-size: 18px;
+    }
+}
+@media (min-width: 1600px) {
+    .justified-text {
+        font-size: 20px;
+    }
+}
+@media (min-width: 2000px) {
+    .justified-text {
+        font-size: 22px;
+    }
+}
+
+/* IIC Vision Mission Objectives Section */
+
+.iic-vmo-section {
+  margin-top: 60px;
+}
+
+.iic-card {
+  height: 100%;
+  border: 2px solid #f47c20;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.iic-card h3 {
+  background-color: #f47c20;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.iic-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.iic-card ul {
+  padding-left: 18px;
+}
+
+.iic-card ul li {
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.iic-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 768px) {
+  .iic-card h3 {
+    font-size: 18px;
+  }
+
+  .iic-card p,
+  .iic-card ul li {
+    font-size: 13px;
+  }
+}
+@media (max-width: 397px) {
+  .iic-card h3 {
+    font-size: 16px;
+  }
+
+  .iic-card p,
+  .iic-card ul li {
+    font-size: 12px;
+  }
+}

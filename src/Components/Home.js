@@ -65,6 +65,73 @@ const Home = () => {
 
 
       <Carosel />
+
+      {/* IIC Vision Mission Objectives Section */}
+      <div className="iic-vmo-section container my-5">
+        <div className="row g-4">
+
+          {/* Vision */}
+          <div className="col-md-4">
+            <div className="iic-card">
+              <h3>IIC Vision</h3>
+              <p>
+                To foster a vibrant and sustainable innovation ecosystem within the institution by nurturing creativity, critical thinking, and an entrepreneurial mindset among students and faculty. The Institution’s Innovation Council envisions empowering young innovators to transform ideas into impactful solutions, promote startup culture, and contribute meaningfully to technological advancement, societal well-being, and national growth.
+              </p>
+            </div>
+          </div>
+
+          {/* Mission */}
+          <div className="col-md-4">
+            <div className="iic-card">
+              <h3>IIC Mission</h3>
+              <ul>
+                <li>
+                  To promote innovation-driven activities such as hackathons,
+                  ideation challenges, workshops, and bootcamps.
+                </li>
+                <li>
+                  To strengthen industry–academia collaboration for real-world
+                  problem solving.
+                </li>
+                <li>
+                  To support students and faculty in converting innovative ideas
+                  into prototypes, startups, and intellectual property.
+                </li>
+                <li>
+                  To encourage multidisciplinary learning and research culture.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Objectives */}
+          <div className="col-md-4">
+            <div className="iic-card">
+              <h3>Objectives</h3>
+              <ul>
+                <li>
+                  Identify and nurture innovative ideas aligned with national and
+                  global challenges.
+                </li>
+                <li>
+                  Develop entrepreneurial skills and leadership qualities among
+                  students.
+                </li>
+                <li>
+                  Facilitate mentoring, incubation, and funding support for startups.
+                </li>
+                <li>
+                  Create awareness about innovation, IPR, startups, and emerging
+                  technologies.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
       <div className="mt-3">
         <div className="d-flex justify-content-center fs-3">
           <strong>About Us</strong>
@@ -73,7 +140,7 @@ const Home = () => {
           className={`justified-text container ${isVisible ? "visible" : ""}`}
           ref={textRef}
         >
-          The *Institution’s Innovation Council (IIC), established by the **All
+          The *Institution's Innovation Council (IIC), established by the **All
           India Council for Technical Education (AICTE)* and the *Ministry of
           Education's Innovation Cell (MIC)*, aims to foster a culture of
           innovation and entrepreneurship in higher education institutions

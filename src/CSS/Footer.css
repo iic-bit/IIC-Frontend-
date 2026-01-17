@@ -1,49 +1,122 @@
-body,html {
-    height: 100%;
-}
-.footer {
-    background-color: #003366; /* Dark blue background */
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    border-top: 2px solid #ff3333; /* Red top border to match theme */
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+.iic-footer {
+  background: #083b66;
+  color: #ffffff;
+  padding-top: 50px;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.footer-content {
-    display: flex;
-
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
 }
 
-.contact-item {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-.contact-item a {
-    /* text-decoration: none; */
-    color: #ffff;
+/* Headings */
+.footer-column h4 {
+  font-size: 20px;
+  margin-bottom: 18px;
+  position: relative;
 }
 
-.contact-item .icon {
-    margin-right: 10px;
-    font-size: 20px;
+.footer-column h4::after {
+  content: "";
+  width: 40px;
+  height: 3px;
+  background: #ffffff;
+  position: absolute;
+  left: 0;
+  bottom: -8px;
 }
 
-.social-media a {
-    color: white;
-    margin: 0 10px;
-    font-size: 24px;
-    text-decoration: none;
+/* Quick Links */
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.social-media a:hover {
-    color: #ff3333; /* Red color on hover */
+.footer-column ul li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.social-media .icon {
-    transition: color 0.3s ease;
+.footer-link {
+  cursor: pointer;
+}
+
+.footer-link a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-link:hover,
+.footer-link a:hover {
+  text-decoration: underline;
+}
+
+/* Contact text + icon alignment FIX */
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.7;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.footer-column p svg {
+  margin-top: 4px;
+}
+
+/* Social Icons */
+.footer-social {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+  background: #ffffff;
+  color: #083b66;
+}
+
+/* Map */
+.footer-map iframe {
+  width: 100%;
+  height: 180px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Bottom strip */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 14px;
+  background: #062f52;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    text-align: left;
+  }
 }

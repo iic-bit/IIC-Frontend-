@@ -132,7 +132,7 @@ const Home = () => {
       </div>
 
 
-      <div className="mt-3">
+      <div className="mt-3" id="about">
         <div className="d-flex justify-content-center fs-3">
           <strong>About Us</strong>
         </div>

@@ -59,7 +59,7 @@
 
 .iic-card {
   height: 100%;
-  border: 2px solid #f47c20;
+  border: 2px solid #083b66;
   border-radius: 10px;
   padding: 20px;
   background-color: #ffffff;
@@ -67,7 +67,7 @@
 }
 
 .iic-card h3 {
-  background-color: #f47c20;
+  background-color: #062f52;
   color: #ffffff;
   padding: 10px;
   border-radius: 6px;

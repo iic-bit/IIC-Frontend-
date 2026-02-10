@@ -58,11 +58,11 @@ const Footer = () => {
           </p>
 
           <p>
-            <FaPhoneAlt /> Mr. Parth Rane (Faculty Member): +91 90829 13961
+            <FaPhoneAlt /> Dr. Nirmala Kamble (IIC President): +91 98208 68441
           </p>
 
           <p>
-            <FaPhoneAlt />Gargi Surse (Student) (IIC President): +91 70410 76454
+            <FaPhoneAlt />Ms. Smita Dandge: +91 98333 12233
           </p>
 
           <p>

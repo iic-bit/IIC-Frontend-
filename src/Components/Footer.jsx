@@ -62,7 +62,7 @@ const Footer = () => {
           </p>
 
           <p>
-            <FaPhoneAlt />Ms. Smita Dandge: +91 98333 12233
+            <FaPhoneAlt />Ms. Smita Dandge (IIC Vice President): +91 98333 12233
           </p>
 
           <p>

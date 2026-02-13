@@ -90,7 +90,7 @@ const Home = () => {
                   ideation challenges, workshops, and bootcamps.
                 </li>
                 <li>
-                  To strengthen industry–academia collaboration for real-world
+                  To strengthen industry-academia collaboration for real-world
                   problem solving.
                 </li>
                 <li>
@@ -110,8 +110,8 @@ const Home = () => {
               <h3>Objectives</h3>
               <ul>
                 <li>
-                  Identify and nurture innovative ideas aligned with national and
-                  global challenges.
+                  Identify and nurture innovative ideas aligned with societal and
+                  industrial challenges.
                 </li>
                 <li>
                   Develop entrepreneurial skills and leadership qualities among
